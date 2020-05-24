@@ -7,6 +7,7 @@ import { SiteLayoutComponent } from './shared/layouts/site-layout/site-layout.co
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { MainComponent } from './main/main.component';
 import { FilmComponent } from './film/film.component';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,9 @@ import { FilmComponent } from './film/film.component';
     SiteLayoutComponent,
     SidenavComponent,
     MainComponent,
-    FilmComponent
+    FilmComponent,
+    BrowserModule,
+    HttpClientModule
   ],
   imports: [
     BrowserModule,
