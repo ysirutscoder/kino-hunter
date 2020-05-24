@@ -1,0 +1,24 @@
+@import "~materialize-css/dist/css/materialize.min.css";
+@import "styles.min.css";
+
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+.auth-block .card {
+    border-radius: 20px;
+    width:350px;
+    height:400px;
+}
+.auth-block .card .card-action {
+    background-color: transparent;
+    border-top: none;
+    position: relative;
+    padding: 16px 24px;
+}
+
