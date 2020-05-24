@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { SiteLayoutComponent } from './shared/layouts/site-layout/site-layout.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { MainComponent } from './main/main.component';
+import { FilmComponent } from './film/film.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SiteLayoutComponent,
     SidenavComponent,
-    MainComponent
+    MainComponent,
+    FilmComponent
   ],
   imports: [
     BrowserModule,
