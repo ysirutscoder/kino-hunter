@@ -1,0 +1,56 @@
+#yohoho {
+  height: 100vh;
+  width: 100%;
+}
+
+.player {
+  img {
+    width: 100vw;
+    height: auto;
+    position: fixed;
+  }
+
+  &__back-btn {
+    position: fixed;
+    z-index: 10;
+    top: 30px;
+    left: 30px;
+    font-size: 3em;
+    color: white;
+    transition: all ease .3s;
+
+    &:hover {
+      left: 28px;
+      cursor: pointer;
+    }
+  }
+
+  &__play {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    font-size: 10em;
+    transform: translate(-50%, -50%);
+    color: white;
+    animation: playBtnMove 1s;
+
+    &:hover {
+      cursor: pointer;
+      color: rgb(216, 216, 216);
+    }
+  }
+}
+
+@keyframes playBtnMove {
+  0% {
+    top: 23%;
+    left: 87%;
+    font-size: 6em;
+  }
+
+  100% {
+    top: 50%;
+    left: 50%;
+    font-size: 10em;
+  }
+}

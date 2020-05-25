@@ -1,1 +1,6 @@
-<p>watch-movie works!</p>
+<div class="player">
+    <i class="material-icons player__back-btn" [routerLink]="['/list']" >keyboard_backspace</i>
+    <img [src]="imgPath" alt="movie.title">
+    <i (click)="play()" class="large material-icons player__play">play_circle_filled</i>
+    <div id="yohoho" [attr.data-title]="searchIdentifier" ></div>
+</div>

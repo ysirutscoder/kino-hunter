@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Movie } from 'src/app/shared/movie.model';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MoviesService } from 'src/app/shared/movies.service';
 
 @Component({
@@ -14,6 +14,7 @@ export class MovieDetailsComponent implements OnInit {
   expanded: boolean;
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private moviesService: MoviesService) {
 
     this.id = +this.route.snapshot.params['id'];
@@ -29,7 +30,15 @@ export class MovieDetailsComponent implements OnInit {
   ngOnInit() {
   }
 
-  getImgUrl() {
+  getBgImgUrl() {
     return this.moviesService.httpConfig.imgBackgroundBaseUrl + this.movie.backdrop_path
+  }
+
+  getImgUrl() {
+    return this.moviesService.httpConfig.imgBaseUrl + this.movie.poster_path
+  }
+
+  playMovie() {
+    this.router.navigate(['/watch',this.movie.id], {relativeTo: this.route})
   }
 }

@@ -6,6 +6,6 @@ export class Movie {
         public overview: string,
         public release_date: string,
         public poster_path: string,
-        public backdrop_path: string
+        public backdrop_path: string,
     ) { }
 }

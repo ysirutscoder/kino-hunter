@@ -8,6 +8,10 @@
     left: 0;
   }
 
+  &__title {
+    font-size: 3em;
+  }
+
   &__background {
     width: 100%;
     height: auto;
@@ -23,20 +27,21 @@
   }
 
   &__text {
-    position: absolute;
-    top: 10px;
-    left: 40px;
+    // position: absolute;
+    // top: 10px;
+    // left: 40px;
     color: white;
     max-width: 43%;
-    padding-right: 3%;
+    // padding-right: 3%;
     font-size: 1.2em;
-    overflow: hidden;
+    // overflow: hidden;
     max-height: 19em;
-    overflow-y: auto;
+    // overflow-y: auto;
 
     & span {
-      color: rgb(255, 0, 0);
+      color: rgb(199, 199, 199);
       margin-left: 10px;
+      font-size: 0.95em;
 
       &:hover {
         cursor: pointer;
@@ -47,6 +52,39 @@
   &__release-date {
     & span {
       color: rgb(40, 255, 40);
+    }
+  }
+
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    top: 10px;
+    max-width: 90%;
+    left: 5%;
+    right: 5%;
+  }
+
+  &__player {
+    position: relative;
+
+    img {
+      max-width: 15em;
+    }
+
+    i {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      text-shadow: 0 0 2px black;
+      transition: all ease .3s;
+
+      &:hover {
+        cursor: pointer;
+        color: rgb(231, 228, 228);
+      }
     }
   }
 }
