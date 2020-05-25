@@ -11,6 +11,7 @@ import { MoviesService } from 'src/app/shared/movies.service';
 export class MovieDetailsComponent implements OnInit {
   movie: Movie;
   id: number;
+  expanded: boolean;
   constructor(
     private route: ActivatedRoute,
     private moviesService: MoviesService) {
@@ -21,12 +22,13 @@ export class MovieDetailsComponent implements OnInit {
       .subscribe((params: Params) => {
         this.id = +params['id'];
         this.movie = this.moviesService.getMovie(this.id);
+        this.expanded = false;
       })
   }
 
   ngOnInit() {
-
   }
+
   getImgUrl() {
     return this.moviesService.httpConfig.imgBackgroundBaseUrl + this.movie.backdrop_path
   }

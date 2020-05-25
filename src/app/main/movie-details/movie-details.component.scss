@@ -1,13 +1,74 @@
 .details {
-  &-outer {
+  font-family: 'Nanum Gothic', sans-serif;
+
+  &__outer {
     width: 100%;
-    height: 40%;
-    background-color: rgba(0, 0, 0, 0.5);
-    position: absolute;
+    position: fixed;
+    top: 0;
+    left: 0;
   }
 
-  &-background {
+  &__background {
     width: 100%;
     height: auto;
   }
+
+  &__inner {
+    background-color: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__text {
+    position: absolute;
+    top: 10px;
+    left: 40px;
+    color: white;
+    max-width: 43%;
+    padding-right: 3%;
+    font-size: 1.2em;
+    overflow: hidden;
+    max-height: 19em;
+    overflow-y: auto;
+
+    & span {
+      color: rgb(255, 0, 0);
+      margin-left: 10px;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  &__release-date {
+    & span {
+      color: rgb(40, 255, 40);
+    }
+  }
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(250, 250, 250);
+  border-radius: 2px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #b30000;
 }

@@ -1,6 +1,12 @@
-<div class="details-outer">
-    <img [src]="getImgUrl()" [alt]="movie.title" class="details-background">
-    <h3>{{movie.title}}</h3>
-    <h6>{{movie.release_date}}</h6>
-    <p>{{movie.overview}}</p>
+<div class="details__outer">
+    <img [src]="getImgUrl()" [alt]="movie.title" class="details__background">
+    <div class="details__inner"></div>
+    <div class="details__text">
+        <h3 class="details__title">{{movie.title}}</h3>
+        <h6 class="details__release-date"><span>Release date: </span>{{movie.release_date.slice(0,4)}}</h6>
+        <p class="details__overview" *ngIf="!expanded">{{movie.overview.split(' ').slice(0,15).join(' ')}}...<span
+            *ngIf="!expanded" (click)="expanded=!expanded">Читать дальше</span></p>
+        <p class="details__overview" *ngIf="expanded">{{movie.overview}}<span *ngIf="expanded"
+            (click)="expanded=!expanded">Скрыть</span></p>
+    </div>
 </div>
