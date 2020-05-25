@@ -1,0 +1,10 @@
+<router-outlet></router-outlet>
+<div class="movies-list">
+    <div *ngFor="let movie of movies" >
+      <img 
+        [routerLink]="[movie.id]" 
+        [src]="getImgUrl(movie.poster_path)" 
+        [alt]="movie.original_title"
+        class="movie-poster">
+    </div>
+</div>
