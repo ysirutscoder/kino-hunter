@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Movie } from '../shared/movie.model';
 import { MoviesService } from '../shared/movies.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { yo } from '../../script.js'
 
 @Component({
   selector: 'app-watch-movie',
