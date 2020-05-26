@@ -1,10 +1,34 @@
 <router-outlet></router-outlet>
+<div class="search">
+  <input 
+    #searcher
+    [ngClass]="{opened: isSearchOpened}"  
+    class="closed"
+    type="text" 
+    placeholder="Search for..."
+    [(ngModel)]="searchInputValue"
+    (keyup)="handleEntering($event.keyCode)">
+  <i 
+    class="material-icons search-button" 
+    (click)="handleSearchClick()" 
+    #searchBtn>
+    search
+  </i>
+</div>
 <div class="movies-list__outer">
-    <div class="movies-list__shadow"></div>
+    <div class="movies-list--shadow"></div>
     <div class="movies-list">
-      <div *ngFor="let movie of movies">
-        <img [routerLink]="[movie.id]" [src]="getImgUrl(movie.poster_path)" [alt]="movie.original_title"
-          class="movie-poster">
+      <div *ngFor="let genre of moviesGenres">
+        <h5 class="movies-list__genre-name">{{genre.name}}</h5>
+        <div class="movies-list__row">
+          <div *ngFor="let movie of genre.movies" class="movies-list__item">
+            <img 
+              [routerLink]="[genre.id ,movie.id]" 
+              [src]="getImgUrl(movie.poster_path)" 
+              [alt]="movie.original_title"
+              class="movies-list__poster">
+          </div>
+        </div>
       </div>
     </div>
 </div>

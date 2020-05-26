@@ -1,0 +1,9 @@
+.search-result {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 5px;
+
+  &__poster {
+    margin: 5px;
+  }
+}

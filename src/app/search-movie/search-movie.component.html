@@ -1,0 +1,9 @@
+<div class="search-result">
+    <div *ngFor="let movie of movies" class="search-result__movie">
+        <img 
+        *ngIf="movie.poster_path !== undefined && movie.poster_path !== null"
+          [src]="getImgUrl(movie.poster_path)" 
+          [alt]="movie.original_title"
+          class="search-result__poster">
+    </div>
+</div>
