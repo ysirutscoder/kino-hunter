@@ -7,7 +7,7 @@
     type="text" 
     placeholder="Search for..."
     [(ngModel)]="searchInputValue"
-    (keyup)="handleEntering($event.keyCode)">
+    (keyup)="handleSearchClick()">
   <i 
     class="material-icons search-button" 
     (click)="handleSearchClick()" 

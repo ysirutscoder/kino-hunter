@@ -1,9 +1,16 @@
-<div class="search-result">
-    <div *ngFor="let movie of movies" class="search-result__movie">
-        <img 
-        *ngIf="movie.poster_path !== undefined && movie.poster_path !== null"
-          [src]="getImgUrl(movie.poster_path)" 
-          [alt]="movie.original_title"
-          class="search-result__poster">
+<div class="search__outer">
+    <div class="search__background"></div>
+    <div class="search__header">
+      <i class="medium material-icons search__back-arrow" (click)="returnBack()">
+        keyboard_backspace</i>
+      <div class="search__input">
+        <input #input type="text" [(ngModel)]="searchQuery" (keyup)="handleTyping()">
+      </div>
+    </div>
+    <div class="search__result">
+      <div *ngFor="let movie of movies" class="search__movie">
+        <img *ngIf="movie.poster_path !== undefined && movie.poster_path !== null" [src]="getImgUrl(movie.poster_path)"
+          [alt]="movie.original_title" class="search__poster">
+      </div>
     </div>
 </div>

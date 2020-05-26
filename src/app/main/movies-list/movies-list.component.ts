@@ -60,7 +60,8 @@ export class MoviesListComponent implements OnInit {
     }
   }
 
-  handleEntering(keyCode: number) {
-    if (keyCode === 13) this.handleSearchClick()
+  handleEntering(e: any) {
+    if (e.keyCode === 13) this.handleSearchClick()
+    
   }
 }

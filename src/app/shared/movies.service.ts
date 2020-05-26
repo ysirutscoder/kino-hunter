@@ -25,7 +25,7 @@ export class MoviesService {
         },
         {
             "id": 80,
-            "name": "Триллеры",
+            "name": "Криминальные",
             "movies": []
         },
         {
@@ -35,7 +35,7 @@ export class MoviesService {
         },
         {
             "id": 18,
-            "name": "Драма",
+            "name": "Драмы",
             "movies": []
         },
         {
@@ -55,7 +55,7 @@ export class MoviesService {
         },
         {
             "id": 27,
-            "name": "Ужастики",
+            "name": "Ужасы",
             "movies": []
         },
         {
@@ -75,12 +75,12 @@ export class MoviesService {
         },
         {
             "id": 878,
-            "name": "Научно-популярные",
+            "name": "Научная фантастика",
             "movies": []
         },
         {
             "id": 10770,
-            "name": "ТВ шоу",
+            "name": "Сериалы",
             "movies": []
         },
         {
@@ -146,6 +146,5 @@ export class MoviesService {
         films.results.forEach(movie => {
             this.searchResultMovies.push(new Movie(movie.id, movie.original_title, movie.title, movie.overview, movie.release_date, movie.poster_path, movie.backdrop_path))
         })
-        console.log(this.searchResultMovies);
     }
 }
