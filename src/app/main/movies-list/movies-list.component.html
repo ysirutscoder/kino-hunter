@@ -2,7 +2,7 @@
 <div class="search">
   <input 
     #searcher
-    [ngClass]="{opened: isSearchOpened}"  
+    [ngClass]="{opened: getIsSearchOpened()}"  
     class="closed"
     type="text" 
     placeholder="Search for..."
@@ -18,7 +18,7 @@
 <div class="movies-list__outer">
     <div class="movies-list--shadow"></div>
     <div class="movies-list">
-      <div *ngFor="let genre of moviesGenres">
+      <div *ngFor="let genre of getMoviesGenres()">
         <h5 class="movies-list__genre-name">{{genre.name}}</h5>
         <div class="movies-list__row">
           <div *ngFor="let movie of genre.movies" class="movies-list__item">

@@ -11,7 +11,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class MoviesListComponent implements OnInit {
   private moviesGenres: { id: number, name: string, movies: Movie[] }[] = [];
   private isSearchOpened: boolean = false;
-  private searchInputValue: string;
+  searchInputValue: string;
 
   @ViewChild('searcher', { static: false }) searcher: ElementRef;
   @ViewChild('searchBtn', { static: false }) searchBtn: ElementRef;
@@ -42,8 +42,6 @@ export class MoviesListComponent implements OnInit {
     }, 200)
   }
 
-
-
   getImgUrl(imgPath: string) {
     return this.moviesService.httpConfig.imgBaseUrl + imgPath;
   }
@@ -63,5 +61,13 @@ export class MoviesListComponent implements OnInit {
   handleEntering(e: any) {
     if (e.keyCode === 13) this.handleSearchClick()
     
+  }
+
+  getIsSearchOpened() {
+    return this.isSearchOpened;
+  }
+
+  getMoviesGenres() {
+    return this.moviesGenres;
   }
 }
