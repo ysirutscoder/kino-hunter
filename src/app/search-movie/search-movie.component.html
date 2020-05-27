@@ -8,9 +8,21 @@
       </div>
     </div>
     <div class="search__result">
-      <div *ngFor="let movie of movies" class="search__movie">
-        <img *ngIf="movie.poster_path !== undefined && movie.poster_path !== null" [src]="getImgUrl(movie.poster_path)"
-          [alt]="movie.original_title" class="search__poster">
+      <div 
+        *ngFor="let movie of movies"
+        class="search__movie"
+        [ngClass]="{selected: movie.id == selected_id}">
+        <img 
+          *ngIf="movie.poster_path !== undefined && movie.poster_path !== null" 
+          [src]="getImgUrl(movie.poster_path)"
+          [alt]="movie.original_title" 
+          class="search__poster"
+          [routerLink]="[movie.id]"
+          (click)="handlePosterSelect(movie.id)"
+          queryParamsHandling="merge">
+          <router-outlet 
+            *ngIf="movie.id == selected_id"
+            [ngStyle]="{'background-image': getImgUrl()}"></router-outlet>
       </div>
     </div>
 </div>

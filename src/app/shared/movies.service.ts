@@ -112,11 +112,41 @@ export class MoviesService {
     constructor() { }
 
     getMovie(genreId: number, id: number) {
-        return this.moviesGenres.find(genre => {
-            return genre.id == genreId
-        }).movies.find(movie => {
-            return movie.id == id;
+        // return this.moviesGenres.find(genre => {
+        //     return genre.id == genreId
+        // }).movies.find(movie => {
+        //     return movie.id == id;
+        // })
+        let selectedMovie: Movie;
+        this.moviesGenres.filter(genre => {
+            return genre.movies.find(movie => {
+                if (movie.id == id) {
+                    selectedMovie = movie;
+                    return true;
+                }
+                return false
+            })
         })
+        return selectedMovie;
+    }
+
+    getMovieTry(id: number) {
+        // return this.moviesGenres.find(genre => {
+        //     return genre.movies.find(movie => {
+        //         return movie.id == id
+        //     })
+        // })
+        let selectedMovie;
+        this.moviesGenres.filter(genre => {
+            return genre.movies.find(movie => {
+                if (movie.id == id) {
+                    selectedMovie = movie;
+                    return true;
+                }
+                return false
+            })
+        })
+        return selectedMovie;
     }
 
     getMovies() {
@@ -125,6 +155,12 @@ export class MoviesService {
 
     getSearchedMovies() {
         return this.searchResultMovies.slice();
+    }
+
+    getSearchedMovie(id: number) {
+        return this.searchResultMovies.find(movie => {
+            return movie.id == id;
+        })
     }
 
     fetchMovies() {

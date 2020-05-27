@@ -41,7 +41,7 @@ function yo_ahoy_key(event) {
     }
 }
 
-function yo(self) {
+export function yo(self) {
     var h, a, w, i, l, y, s, t = false, p = '';
 
     var sel = self && self.getAttribute('data-ahoy')

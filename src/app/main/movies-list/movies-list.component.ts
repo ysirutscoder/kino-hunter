@@ -37,7 +37,7 @@ export class MoviesListComponent implements OnInit {
     let interval = setInterval(() => {
       if (this.moviesGenres.length !== 0) {
         clearInterval(interval)
-        this.router.navigate([28, this.moviesGenres[0].movies[Math.ceil(Math.random() * 20)].id], { relativeTo: this.route })
+        this.router.navigate([this.moviesGenres[0].movies[Math.ceil(Math.random() * 20)].id], { relativeTo: this.route })
       }
     }, 200)
   }
