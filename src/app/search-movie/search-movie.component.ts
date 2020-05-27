@@ -11,6 +11,7 @@ import { Movie } from '../shared/movie.model';
 export class SearchMovieComponent implements OnInit {
   searchQuery: string = '';
   movies: Movie[] = [];
+  selected_id: number;
 
   @ViewChild('input', { static: false }) input: ElementRef;
 
@@ -45,13 +46,20 @@ export class SearchMovieComponent implements OnInit {
 
   handleTyping() {
     if (this.searchQuery.length == 0) {
-      console.log('true')
       this.router.navigate(['/list/28/299536'], { relativeTo: this.route })
     } else
-      this.router.navigate([], { queryParams: { q: this.searchQuery }, relativeTo: this.route })
+      this.router.navigate([], { queryParams: { q: this.searchQuery }, relativeTo: this.route, queryParamsHandling: "merge" })
   }
 
   returnBack() {
     this.router.navigate(['/list/28/299536'], { relativeTo: this.route })
+  }
+
+  isShowDetails(id: number) {
+    return this.selected_id == id
+  }
+
+  handlePosterSelect(id: number) {
+    this.selected_id = id;
   }
 }

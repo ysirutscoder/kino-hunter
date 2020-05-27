@@ -5,6 +5,7 @@ import { MovieDetailsComponent } from './main/movie-details/movie-details.compon
 import { MoviesListComponent } from './main/movies-list/movies-list.component';
 import { WatchMovieComponent } from './watch-movie/watch-movie.component';
 import { SearchMovieComponent } from './search-movie/search-movie.component';
+import { MovieShortDetailsComponent } from './search-movie/movie-short-details/movie-short-details.component';
 
 const routes: Routes = [
     { path: '', redirectTo: '/list', pathMatch: 'full' },
@@ -12,11 +13,15 @@ const routes: Routes = [
         path: '', component: SiteLayoutComponent, children: [
             {
                 path: 'list', component: MoviesListComponent, children: [
-                    { path: ':genre_id/:id', component: MovieDetailsComponent },
+                    { path: ':id', component: MovieDetailsComponent },
                 ]
             },
             { path: 'watch/:genre_id/:id', component: WatchMovieComponent },
-            { path: 'search', component: SearchMovieComponent }
+            {
+                path: 'search', component: SearchMovieComponent, children: [
+                    { path: ':id', component: MovieShortDetailsComponent }
+                ]
+            }
         ]
     }
 ];
