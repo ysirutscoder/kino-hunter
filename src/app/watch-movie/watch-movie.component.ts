@@ -35,7 +35,9 @@ export class WatchMovieComponent implements OnInit {
     xhr.send()
     xhr.onload = () => {
       let result = JSON.parse(xhr.response)
-      this.kinopoiskId = result.films[0].filmId;
+      if (result.films[0].year == this.movie.release_date.slice(0, 4)) {
+        this.kinopoiskId = result.films[0].filmId;
+      }
       this.canPlay = true;
     }
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild, Renderer2 } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, Renderer2, HostListener } from '@angular/core';
 import { Movie } from 'src/app/shared/movie.model';
 import { MoviesService } from 'src/app/shared/movies.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -13,6 +13,10 @@ export class MoviesListComponent implements OnInit {
   private isSearchOpened: boolean = false;
   searchInputValue: string;
 
+  @HostListener('window:scroll', ['$event'])
+  handleWindowScroll(event) {
+    console.log(event)
+  }
   @ViewChild('searcher', { static: false }) searcher: ElementRef;
   @ViewChild('searchBtn', { static: false }) searchBtn: ElementRef;
 
@@ -60,8 +64,9 @@ export class MoviesListComponent implements OnInit {
 
   handleEntering(e: any) {
     if (e.keyCode === 13) this.handleSearchClick()
-    
+
   }
+
 
   getIsSearchOpened() {
     return this.isSearchOpened;
