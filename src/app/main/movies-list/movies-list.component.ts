@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild, Renderer2, HostListener } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, Renderer2, HostListener, OnDestroy } from '@angular/core';
 import { Movie } from 'src/app/shared/movie.model';
 import { MoviesService } from 'src/app/shared/movies.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -12,6 +12,7 @@ export class MoviesListComponent implements OnInit {
   private moviesGenres: { id: number, name: string, movies: Movie[] }[] = [];
   private isSearchOpened: boolean = false;
   searchInputValue: string;
+  isPageLoaded: boolean = false;
 
   @HostListener('window:scroll', ['$event'])
   handleWindowScroll(event) {
@@ -36,14 +37,23 @@ export class MoviesListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.moviesService.fetchMovies();
+    if (this.moviesService.getMovies()[0].movies.length == 0) {
+      this.moviesService.fetchMovies();
+    }
     this.moviesGenres = this.moviesService.getMovies();
     let interval = setInterval(() => {
       if (this.moviesGenres.length !== 0) {
         clearInterval(interval)
         this.router.navigate([this.moviesGenres[0].movies[Math.ceil(Math.random() * 20)].id], { relativeTo: this.route })
+        this.isPageLoaded = true;
       }
     }, 200)
+    setTimeout(() => {
+      if (!this.isPageLoaded) {
+        this.ngOnInit();
+      }
+    }, 2000)
+
   }
 
   getImgUrl(imgPath: string) {

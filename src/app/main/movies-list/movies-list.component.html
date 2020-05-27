@@ -1,35 +1,33 @@
-<router-outlet></router-outlet>
-<div class="movies-list__background"></div>
-<div class="search">
-  <input 
-    #searcher
-    [ngClass]="{opened: getIsSearchOpened()}"  
-    class="closed"
-    type="text" 
-    placeholder="Search for..."
-    [(ngModel)]="searchInputValue"
-    (keyup)="handleSearchClick()">
-  <i 
-    class="material-icons search-button" 
-    (click)="handleSearchClick()" 
-    #searchBtn>
-    search
-  </i>
+<div *ngIf="!isPageLoaded" class="movies-list__preloader">
+  <div class="movies-list__background"></div>
+  <div class="movies-list__load-icon">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
 </div>
-<div class="movies-list__outer">
+<div *ngIf="isPageLoaded" class="movies-list__loaded">
+  <router-outlet></router-outlet>
+  <div class="movies-list__background"></div>
+  <div class="search">
+    <input #searcher [ngClass]="{opened: getIsSearchOpened()}" class="closed" type="text" placeholder="Search for..."
+      [(ngModel)]="searchInputValue" (keyup)="handleSearchClick()">
+    <i class="material-icons search-button" (click)="handleSearchClick()" #searchBtn>
+      search
+    </i>
+  </div>
+  <div class="movies-list__outer">
     <div class="movies-list--shadow"></div>
     <div class="movies-list">
       <div *ngFor="let genre of getMoviesGenres()">
         <h5 class="movies-list__genre-name">{{genre.name}}</h5>
         <div class="movies-list__row">
           <div *ngFor="let movie of genre.movies" class="movies-list__item">
-            <img 
-              [routerLink]="[movie.id]" 
-              [src]="getImgUrl(movie.poster_path)" 
-              [alt]="movie.original_title"
+            <img [routerLink]="[movie.id]" [src]="getImgUrl(movie.poster_path)" [alt]="movie.original_title"
               class="movies-list__poster">
           </div>
         </div>
       </div>
     </div>
+  </div>
 </div>

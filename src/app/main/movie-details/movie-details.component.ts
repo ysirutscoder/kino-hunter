@@ -41,4 +41,10 @@ export class MovieDetailsComponent implements OnInit {
   playMovie() {
     this.router.navigate(['/watch', this.id], { relativeTo: this.route })
   }
+
+  getSlicedOverview() {
+    return (this.movie.overview.split(' ').length + this.movie.title.split(' ').length) <= 25 ?
+      this.movie.overview :
+      this.movie.overview.split(' ').slice(0, (25 - 3 * this.movie.title.split(' ').length)).join(' ');
+  }
 }

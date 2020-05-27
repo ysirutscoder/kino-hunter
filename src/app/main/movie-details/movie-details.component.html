@@ -6,7 +6,7 @@
           <h3 class="details__title">{{movie.title}}</h3>
           <h6 class="details__release-date"><span>Дата выхода: </span>{{movie.release_date.slice(0,4)}}</h6>
           <p class="details__overview" *ngIf="!expanded">
-              {{movie.overview.split(' ').length >= 15 ? movie.overview.split(' ').slice(0,15).join(' ') : movie.overview}}<span
+              {{getSlicedOverview()}}<span
               *ngIf="!expanded && movie.overview.split(' ').length >= 15" (click)="expanded=!expanded">...Читать дальше</span></p>
           <p class="details__overview" *ngIf="expanded">{{movie.overview}}
               <span *ngIf="expanded"

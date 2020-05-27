@@ -24,6 +24,10 @@ body {
   padding: 16px 24px;
 }
 
+img:focus {
+  outline: none;
+}
+
 .yohoho {
   display: none;
 }

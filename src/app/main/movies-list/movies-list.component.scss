@@ -65,6 +65,35 @@
       -webkit-box-shadow: none;
     }
   }
+
+  &__load-icon {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    display: flex;
+
+    div {
+      height: 3em;
+      width: 3em;
+      background-color: rgb(117, 117, 117);
+      border-radius: 50%;
+      margin: 5px;
+
+      &:nth-child(1) {
+        animation: preloader .6s ease -.6s infinite;
+      }
+
+      &:nth-child(2) {
+        animation: preloader .6s ease -.4s infinite;
+      }
+
+      &:nth-child(3) {
+        animation: preloader .6s ease -.2s infinite;
+      }
+    }
+  }
 }
 
 ::-webkit-scrollbar {
@@ -126,6 +155,20 @@
 
   100% {
     width: 0px;
+  }
+}
+
+@keyframes preloader {
+  0% {
+    opacity: .2;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: .2;
   }
 }
 

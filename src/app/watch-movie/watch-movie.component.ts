@@ -26,6 +26,11 @@ export class WatchMovieComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (!this.movie) {
+
+      this.id = +this.route.snapshot.params['id']
+      this.movie = this.moviesService.fetchMovie(this.id)
+    }
   }
 
   getKinopoiskId() {
@@ -52,6 +57,7 @@ export class WatchMovieComponent implements OnInit {
     setTimeout(() => {
       this.id = +this.route.snapshot.params['id']
       this.movie = this.moviesService.getMovie(this.id)
+
       this.searchIdentifier = `${this.movie.title} / ${this.movie.original_title} (${this.movie.release_date.slice(0, 4)})`
       this.imgPath = this.moviesService.httpConfig.imgBackgroundBaseUrl + this.movie.backdrop_path;
       this.route.params

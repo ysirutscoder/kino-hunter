@@ -159,4 +159,17 @@ export class MoviesService {
             this.searchResultMovies.push(new Movie(movie.id, movie.original_title, movie.title || movie.name, movie.overview, movie.release_date || movie.first_air_date, movie.poster_path, movie.backdrop_path))
         })
     }
+
+    fetchMovie(id: number) {
+        let film: Movie;
+        (async () => {
+            let url: string = `${this.httpConfig.baseUrl}/movie/${id}?api_key=${this.httpConfig.apiKey}&language=${this.httpConfig.language}`;
+            let response = await fetch(url, { method: "GET" })
+            let movie = await response.json();
+            film = new Movie(movie.id, movie.original_title, movie.title || movie.name, movie.overview, movie.release_date || movie.first_air_date, movie.poster_path, movie.backdrop_path)
+return film
+        })()
+        console.log(film)
+        return film
+    }
 }

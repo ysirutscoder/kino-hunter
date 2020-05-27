@@ -29,7 +29,7 @@ export class SearchMovieComponent implements OnInit {
         clearInterval(interval)
         this.input.nativeElement.focus();
       }
-    }, 10)
+    }, 5)
     this.route.queryParams
       .subscribe(async (queryParams: Params) => {
         this.searchQuery = queryParams['q']
@@ -45,10 +45,14 @@ export class SearchMovieComponent implements OnInit {
   }
 
   handleTyping() {
-    if (this.searchQuery.length == 0) {
-      this.router.navigate(['/list/299536'], { relativeTo: this.route })
-    } else
-      this.router.navigate([], { queryParams: { q: this.searchQuery }, relativeTo: this.route, queryParamsHandling: "merge" })
+    // if (this.searchQuery.length == 0) {
+
+    //   this.movies = this.moviesService.getMovies[0].movies;
+
+    // } else {
+
+    this.router.navigate([], { queryParams: { q: this.searchQuery }, relativeTo: this.route, queryParamsHandling: "merge" })
+    // }
   }
 
   returnBack() {
