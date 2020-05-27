@@ -1,6 +1,27 @@
+<div class="player__background"></div>
 <div class="player">
     <i class="material-icons player__back-btn" [routerLink]="['/list']" >keyboard_backspace</i>
-    <img [src]="imgPath" alt="movie.title">
+    <img [src]="imgPath" [alt]="movie.title">
     <i (click)="play()" class="large material-icons player__play">play_circle_filled</i>
-    <div id="yohoho" [attr.data-title]="searchIdentifier"></div>
+    <div id="yohoho" 
+        [attr.data-kinopoisk]="kinopoiskId"
+         [attr.data-title]="kinopoiskId ? undefined : searchIdentifier"
+        data-player="bazon,kodik,iframe,hdvb,ustore,alloha,pleer,videospider"
+        data-resize="1"
+        data-autoplay="1"
+        ></div>
 </div>
+
+<!--SPISOK PLAYEROV data-player="bazon,kodik,iframe,hdvb,ustore,alloha,pleer,videospider"
+    
+    "iframe" - плеер с iframe.video
+    "videocdn" - плеер с videocdn.tv  ++{mnogo filmow, est vibor jazyka} -- {plohoje kaczestwo???mozna li pofixit}
+    "kodik" - плеер с kodik.cc
+    "collaps" - плеер с collaps.org   ++{} --{plohoje kaczestwo}
+    "hdvb" - плеер с hdvb.cc      ++{horosheje kaczestwo}  --{mnogo reklamy}
+    "bazon" - плеер с bazon.cc    + {horoshij player, kaczestvo otlicznoje, bystryj}, --{malo filmow, oshibki s vyborom}
+    "ustore" - плеер с ustore.bz   ++ {jest horosheje kaczestwo(no s reklamoj)}  --{oshybajetsya z viborom}
+    "alloha" - плеер с alloha.tv  ++ {jest raznyje perevody}    --{medlennyj}
+    "pleer" - плеер с pleer.video   -----{voobshe net filmow}  ?????
+    "videospider"  ????
+-->

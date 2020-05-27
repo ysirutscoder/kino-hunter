@@ -1,9 +1,8 @@
-<div class="short-details">
-    <h5 class="short-details__title">{{movie.title}}</h5>
-    <h6 class="short-details__release">Release date: {{movie.release_date.slice(0,4)}}</h6>
-    <p class="short-details__overview">{{movie.overview}}</p>
-    <i 
-        class="short_details__play material-icons"
-        [routerLink]="['/watch', movie.id]">
+
+    <div class="short-details">
+      <h5 class="short-details__title">{{movie.title}}</h5>
+      <h6 class="short-details__release">Release date: {{movie.release_date.slice(0,4)}}</h6>
+      <p class="short-details__overview">{{movie.overview}}</p>
+      <i class="short_details__play material-icons" [routerLink]="['/watch', movie.id]">
         play_circle_filled</i>
-</div>
+    </div>

@@ -122,7 +122,7 @@ export class MoviesService {
                 return false
             })
         })
-        return selectedMovie;
+        return selectedMovie ? selectedMovie : this.getSearchedMovie(id)
     }
 
     getMovies() {
@@ -156,7 +156,7 @@ export class MoviesService {
         let films = await response.json();
         this.searchResultMovies.length = 0
         films.results.forEach(movie => {
-            this.searchResultMovies.push(new Movie(movie.id, movie.original_title, movie.title, movie.overview, movie.release_date, movie.poster_path, movie.backdrop_path))
+            this.searchResultMovies.push(new Movie(movie.id, movie.original_title, movie.title || movie.name, movie.overview, movie.release_date || movie.first_air_date, movie.poster_path, movie.backdrop_path))
         })
     }
 }
