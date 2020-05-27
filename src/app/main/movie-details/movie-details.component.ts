@@ -11,21 +11,18 @@ import { MoviesService } from 'src/app/shared/movies.service';
 export class MovieDetailsComponent implements OnInit {
   movie: Movie;
   id: number;
-  genre_id: number;
   expanded: boolean;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private moviesService: MoviesService) {
 
-    this.genre_id = +this.route.snapshot.params['genre_id'];
     this.id = +this.route.snapshot.params['id'];
-    this.movie = this.moviesService.getMovie(this.genre_id, this.id);
+    this.movie = this.moviesService.getMovie(this.id);
     this.route.params
       .subscribe((params: Params) => {
-        this.genre_id = +params['genre_id']
         this.id = +params['id'];
-        this.movie = this.moviesService.getMovie(this.genre_id, this.id);
+        this.movie = this.moviesService.getMovie(this.id);
         this.expanded = false;
       })
   }
@@ -42,6 +39,6 @@ export class MovieDetailsComponent implements OnInit {
   }
 
   playMovie() {
-    this.router.navigate(['/watch', this.genre_id, this.id], { relativeTo: this.route })
+    this.router.navigate(['/watch', this.id], { relativeTo: this.route })
   }
 }

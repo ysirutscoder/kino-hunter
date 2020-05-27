@@ -23,7 +23,7 @@
         <div class="movies-list__row">
           <div *ngFor="let movie of genre.movies" class="movies-list__item">
             <img 
-              [routerLink]="[genre.id ,movie.id]" 
+              [routerLink]="[movie.id]" 
               [src]="getImgUrl(movie.poster_path)" 
               [alt]="movie.original_title"
               class="movies-list__poster">

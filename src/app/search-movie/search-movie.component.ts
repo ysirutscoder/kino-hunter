@@ -46,13 +46,13 @@ export class SearchMovieComponent implements OnInit {
 
   handleTyping() {
     if (this.searchQuery.length == 0) {
-      this.router.navigate(['/list/28/299536'], { relativeTo: this.route })
+      this.router.navigate(['/list/299536'], { relativeTo: this.route })
     } else
       this.router.navigate([], { queryParams: { q: this.searchQuery }, relativeTo: this.route, queryParamsHandling: "merge" })
   }
 
   returnBack() {
-    this.router.navigate(['/list/28/299536'], { relativeTo: this.route })
+    this.router.navigate(['/list/299536'], { relativeTo: this.route })
   }
 
   isShowDetails(id: number) {

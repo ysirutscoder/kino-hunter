@@ -16,7 +16,7 @@ const routes: Routes = [
                     { path: ':id', component: MovieDetailsComponent },
                 ]
             },
-            { path: 'watch/:genre_id/:id', component: WatchMovieComponent },
+            { path: 'watch/:id', component: WatchMovieComponent },
             {
                 path: 'search', component: SearchMovieComponent, children: [
                     { path: ':id', component: MovieShortDetailsComponent }

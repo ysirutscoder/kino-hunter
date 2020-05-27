@@ -12,7 +12,6 @@ import { yo } from '../../script.js'
 export class WatchMovieComponent implements OnInit {
   movie: Movie;
   id: number;
-  genre_id: number;
   searchIdentifier: string;
   imgPath: string;
 
@@ -22,15 +21,17 @@ export class WatchMovieComponent implements OnInit {
   ) {
 
     this.id = +this.route.snapshot.params['id']
-    this.genre_id = +this.route.snapshot.params['genre_id']
-    this.movie = this.moviesService.getMovie(this.genre_id, this.id)
-    this.searchIdentifier = `${this.movie.title} / ${this.movie.original_title} (${this.movie.release_date.slice(0, 4)})`
+    this.movie = this.moviesService.getMovie(this.id)
+    if (this.movie.title.length > 0) this.searchIdentifier += this.movie.title
+    else if (this.movie.original_title.length > 0) this.searchIdentifier += ' / ' + this.movie.original_title;
+    else if (this.movie.release_date.length > 0) this.searchIdentifier += '(' + this.movie.release_date.slice(0, 4) + ')'
+
+    // this.searchIdentifier = `${this.movie.title} / ${this.movie.original_title} (${this.movie.release_date.slice(0, 4)})`
     this.imgPath = this.moviesService.httpConfig.imgBackgroundBaseUrl + this.movie.backdrop_path;
     this.route.params
       .subscribe((params: Params) => {
         this.id = +params['id'];
-        this.genre_id = +params['genre_id']
-        this.movie = this.moviesService.getMovie(this.genre_id, this.id);
+        this.movie = this.moviesService.getMovie(this.id);
       })
 
   }
