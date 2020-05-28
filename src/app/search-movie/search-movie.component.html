@@ -22,7 +22,7 @@
           queryParamsHandling="merge">
           <router-outlet 
             *ngIf="movie.id == selected_id"
-            [ngStyle]="{'background-image': getImgUrl()}"></router-outlet>
+            [ngStyle]="{'background-image': getImgUrl(movie.backdrop_path)}"></router-outlet>
       </div>
     </div>
 </div>

@@ -26,11 +26,6 @@ export class WatchMovieComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (!this.movie) {
-
-      this.id = +this.route.snapshot.params['id']
-      this.movie = this.moviesService.fetchMovie(this.id)
-    }
   }
 
   getKinopoiskId() {
@@ -54,27 +49,27 @@ export class WatchMovieComponent implements OnInit {
   }
 
   initialize() {
-    setTimeout(() => {
+    setTimeout(async () => {
       this.id = +this.route.snapshot.params['id']
-      this.movie = this.moviesService.getMovie(this.id)
+      this.movie = this.moviesService.getMovie(this.id) || await this.moviesService.fetchMovie(this.id)
 
       this.searchIdentifier = `${this.movie.title} / ${this.movie.original_title} (${this.movie.release_date.slice(0, 4)})`
       this.imgPath = this.moviesService.httpConfig.imgBackgroundBaseUrl + this.movie.backdrop_path;
       this.route.params
-        .subscribe((params: Params) => {
+        .subscribe(async (params: Params) => {
           this.id = +params['id'];
-          this.movie = this.moviesService.getMovie(this.id);
+          this.movie = this.moviesService.getMovie(this.id) || await this.moviesService.fetchMovie(this.id);
         })
-      let i = 0;
+      let errorCounter = 0;
       let interval = setInterval(() => {
-        i++
+        errorCounter++
         if (this.movie) {
           clearInterval(interval);
           this.getKinopoiskId()
 
-        } else if (i > 50) { console.log("ERROR"); clearInterval(interval) }
+        } else if (errorCounter > 50) { console.log("ERROR: movie not found"); clearInterval(interval) }
       }, 50)
-    }, 200)
+    }, 0)
   }
 
 }
