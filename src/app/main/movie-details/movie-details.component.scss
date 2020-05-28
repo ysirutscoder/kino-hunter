@@ -31,8 +31,9 @@
     max-width: 43%;
     padding-right: 3%;
     font-size: 1.2em;
-    max-height: 18em;
+    max-height: 18.5em;
     overflow-y: auto;
+    overflow-x: visible;
 
     & span {
       color: rgb(199, 199, 199);

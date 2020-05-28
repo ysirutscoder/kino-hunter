@@ -11,13 +11,12 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class MoviesListComponent implements OnInit {
   private moviesGenres: { id: number, name: string, movies: Movie[] }[] = [];
   private isSearchOpened: boolean = false;
+  isFetchingOnScroll: boolean = false;
   searchInputValue: string;
   isPageLoaded: boolean = false;
 
-  @HostListener('window:scroll', ['$event'])
-  handleWindowScroll(event) {
-    console.log(event)
-  }
+
+
   @ViewChild('searcher', { static: false }) searcher: ElementRef;
   @ViewChild('searchBtn', { static: false }) searchBtn: ElementRef;
 
@@ -37,7 +36,7 @@ export class MoviesListComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.moviesService.getMovies()[0].movies.length == 0) {
+    if (!this.moviesService.getIsGenresMoviesLoaded()) {
       this.moviesService.fetchMovies();
     }
     this.moviesGenres = this.moviesService.getMovies();
@@ -52,7 +51,7 @@ export class MoviesListComponent implements OnInit {
       if (!this.isPageLoaded) {
         this.ngOnInit();
       }
-    }, 2000)
+    }, 1000)
 
   }
 
@@ -77,6 +76,20 @@ export class MoviesListComponent implements OnInit {
 
   }
 
+  onRowScroll(event: any) {
+    let genreId = event.target.id.slice(9)
+    let scrollOffset = event.target.scrollWidth - event.target.clientWidth - event.target.scrollLeft
+    if (scrollOffset < 100 && !this.isFetchingOnScroll) {
+      this.isFetchingOnScroll = true;
+      this.moviesService.fetchMoviesGenre(genreId);
+
+      this.moviesGenres = this.moviesService.getMovies();
+      setTimeout(() => {
+        this.isFetchingOnScroll = false
+      }, 1000)
+    }
+
+  }
 
   getIsSearchOpened() {
     return this.isSearchOpened;

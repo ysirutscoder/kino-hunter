@@ -20,11 +20,18 @@
   <div class="movies-list__outer">
     <div class="movies-list--shadow"></div>
     <div class="movies-list">
-      <div *ngFor="let genre of getMoviesGenres()">
-        <h5 class="movies-list__genre-name">{{genre.name}}</h5>
-        <div class="movies-list__row">
+      <div *ngFor="let genre of getMoviesGenres()" >
+        <h5 
+          [routerLink]="['/search']" 
+          [queryParams]="{genre_id: genre.id}"
+          class="movies-list__genre-name"
+          >{{genre.name}}</h5>
+        <div (scroll)="onRowScroll($event)" [id]="'genre-id-' + genre.id" class="movies-list__row">
           <div *ngFor="let movie of genre.movies" class="movies-list__item">
-            <img [routerLink]="[movie.id]" [src]="getImgUrl(movie.poster_path)" [alt]="movie.original_title"
+            <img 
+              [routerLink]="[movie.id]"
+              [src]="getImgUrl(movie.poster_path)"
+              [alt]="movie.original_title"
               class="movies-list__poster">
           </div>
         </div>

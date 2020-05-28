@@ -11,21 +11,28 @@ import { ActivatedRoute, Params } from '@angular/router';
 export class MovieShortDetailsComponent implements OnInit {
   movie: Movie;
   id: number;
+  genre_id: number;
 
   constructor(
     private moviesService: MoviesService,
     private route: ActivatedRoute,
   ) { }
 
-  ngOnInit() {
-    this.id = +this.route.snapshot.params['id'];
-    this.movie = this.moviesService.getSearchedMovie(this.id)
+  async ngOnInit() {
     this.route.params
       .subscribe((params: Params) => {
         this.id = +params['id']
         this.movie = this.moviesService.getSearchedMovie(this.id)
 
       })
+    this.route.queryParams
+      .subscribe((params: Params) => {
+        this.genre_id = params['genre_id']
+      })
+    if (this.genre_id)
+      this.movie = await this.moviesService.getMovie(this.id, 'genre')
+    else 
+      this.movie = await this.moviesService.getMovie(this.id, 'search')
   }
 
 }

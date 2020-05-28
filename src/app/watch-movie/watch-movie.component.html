@@ -2,10 +2,15 @@
 <div class="player">
     <i class="material-icons player__back-btn" [routerLink]="['/list']" >keyboard_backspace</i>
     <img [src]="imgPath" [alt]="movie.title">
-    <i (click)="play()" class="large material-icons player__play">play_circle_filled</i>
-    <div id="yohoho" 
+    <i 
+        (click)="play()" 
+        class="large material-icons player__play"
+        *ngIf="canPlay">play_circle_filled</i>
+    <i class="large material-icons player__play player__play--loading" *ngIf="!canPlay">autorenew</i>
+    <div 
+        id="yohoho" 
         [attr.data-kinopoisk]="kinopoiskId"
-         [attr.data-title]="kinopoiskId ? undefined : searchIdentifier"
+        [attr.data-title]="kinopoiskId ? undefined : searchIdentifier"
         data-player="bazon,kodik,iframe,hdvb,ustore,alloha,pleer,videospider"
         data-resize="1"
         data-autoplay="1"

@@ -17,17 +17,18 @@ export class MovieDetailsComponent implements OnInit {
     private router: Router,
     private moviesService: MoviesService) {
 
-    this.id = +this.route.snapshot.params['id'];
-    this.movie = this.moviesService.getMovie(this.id);
-    this.route.params
-      .subscribe((params: Params) => {
-        this.id = +params['id'];
-        this.movie = this.moviesService.getMovie(this.id);
-        this.expanded = false;
-      })
+
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.id = +this.route.snapshot.params['id'];
+    this.movie = await this.moviesService.getMovie(this.id, 'genres');
+    this.route.params
+      .subscribe(async (params: Params) => {
+        this.id = +params['id'];
+        this.movie = await this.moviesService.getMovie(this.id, 'genres');
+        this.expanded = false;
+      })
   }
 
   getBgImgUrl() {

@@ -12,6 +12,7 @@ export class SearchMovieComponent implements OnInit {
   searchQuery: string = '';
   movies: Movie[] = [];
   selected_id: number;
+  genre_id: number;
 
   @ViewChild('input', { static: false }) input: ElementRef;
 
@@ -33,11 +34,24 @@ export class SearchMovieComponent implements OnInit {
     this.route.queryParams
       .subscribe(async (queryParams: Params) => {
         this.searchQuery = queryParams['q']
-        setTimeout(async () => {
-          await this.moviesService.fetchMoviesSearch(this.searchQuery)
-          this.movies = this.moviesService.getSearchedMovies();
-        }, 500)
+        this.genre_id = queryParams['genre_id']
+        if (!this.searchQuery) {
+          if (!this.movies.length) {
+            if (!this.moviesService.getIsGenresMoviesLoaded())
+              await this.moviesService.fetchMoviesGenre(this.genre_id, this.moviesService.getCurrentGenreMoviesPage(this.genre_id))
+          }
+          this.movies = this.moviesService.getGenreMovies(this.genre_id)
+        }
+
+        else {
+          setTimeout(async () => {
+            await this.moviesService.fetchMoviesSearch(this.searchQuery)
+            this.movies = this.moviesService.getSearchedMovies();
+          }, 1000)
+        }
       })
+
+    if (!this.searchQuery && !this.genre_id) this.router.navigate([], { queryParams: { genre_id: 28 } })
   }
 
   getImgUrl(imgPath: string) {
@@ -45,18 +59,11 @@ export class SearchMovieComponent implements OnInit {
   }
 
   handleTyping() {
-    // if (this.searchQuery.length == 0) {
-
-    //   this.movies = this.moviesService.getMovies[0].movies;
-
-    // } else {
-
     this.router.navigate([], { queryParams: { q: this.searchQuery }, relativeTo: this.route, queryParamsHandling: "merge" })
-    // }
   }
 
   returnBack() {
-    this.router.navigate(['/list/299536'], { relativeTo: this.route })
+    this.router.navigate(['/list'], { relativeTo: this.route })
   }
 
   isShowDetails(id: number) {
@@ -65,5 +72,10 @@ export class SearchMovieComponent implements OnInit {
 
   handlePosterSelect(id: number) {
     this.selected_id = id;
+  }
+
+  handleScroll(event: any) {
+    console.log('im in')
+    console.log(event.target)
   }
 }

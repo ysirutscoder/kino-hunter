@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   padding-left: 25px;
-  padding-right: 30px;
 
   &__background {
     background-color: rgb(27, 27, 27);
@@ -19,8 +18,8 @@
     justify-content: flex-start;
     flex-wrap: nowrap;
     flex-direction: row;
-    overflow-x: scroll;
-    width: 100vw;
+    overflow-x: auto;
+    width: calc(100vw - 25px);
   }
 
   &__genre-name {
@@ -60,6 +59,7 @@
 
     &:hover {
       cursor: pointer;
+      box-shadow: none;
     }
 
     &:active {
@@ -227,7 +227,6 @@
 
       &:hover {
         cursor: pointer;
-        box-shadow: whitesmoke 2px 2px 2px 2px;
       }
 
       &:active {

@@ -37,12 +37,16 @@
 
   &__play {
     position: fixed;
-    left: 50%;
-    top: 50%;
+    left: calc(50% - 5rem);
+    top: calc(50% - 5rem);
     font-size: 10em;
-    transform: translate(-50%, -50%);
+    // transform: translate(-50%, -50%);
     color: white;
-    animation: playBtnMove 1s;
+    // animation: playBtnMove 1s;
+
+    &--loading {
+      animation: loading .8s infinite;
+    }
 
     &:hover {
       cursor: pointer;
@@ -62,5 +66,15 @@
     top: 50%;
     left: 50%;
     font-size: 10em;
+  }
+}
+
+@keyframes loading {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg)
   }
 }

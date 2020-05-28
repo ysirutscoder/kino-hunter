@@ -12,65 +12,69 @@ import { yo } from '../../script.js'
 export class WatchMovieComponent implements OnInit {
   movie: Movie;
   id: number;
+  mediaType: string;
   searchIdentifier: string;
+  findingArea: string;
   imgPath: string;
   kinopoiskId: number;
   canPlay: boolean = false;
+  findByTitle: boolean = true;
 
   constructor(
     private moviesService: MoviesService,
     private route: ActivatedRoute,
-  ) {
+  ) { }
 
-    this.initialize();
-  }
+  async ngOnInit() {
+    this.route.params
+      .subscribe((params: Params) => {
+        this.id = +params['id'];
+      })
+    this.route.queryParams
+      .subscribe((params: Params) => {
+        this.mediaType = params['media_type']
+      })
+    this.movie = await this.moviesService.getMovie(this.id, this.findingArea, this.mediaType);
+    this.getKinopoiskId();
 
-  ngOnInit() {
+    this.imgPath = this.moviesService.httpConfig.imgBackgroundBaseUrl + this.movie.backdrop_path;
+    let errorCounter = 0;
+    let interval = setInterval(() => {
+      errorCounter++
+      if (this.kinopoiskId) {
+        clearInterval(interval)
+        this.canPlay = true
+      }
+      else if (errorCounter > 100) { console.log("No film finded in KinoP-k"); clearInterval(interval) }
+    }, 50)
+    let loading = setTimeout(() => {
+      if (!this.kinopoiskId) {
+        this.searchIdentifier = `${this.movie.title} / ${this.movie.original_title} (${this.movie.release_date.slice(0, 4)})`
+        if (this.searchIdentifier) this.canPlay = true;
+      }
+    }, 2000)
   }
 
   getKinopoiskId() {
     let xhr = new XMLHttpRequest()
-    xhr.open("GET", `http://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword?keyword=${this.movie.title}&page=1`, true)
+    let url =
+      `http://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword?keyword=
+      ${this.movie.original_title ? this.movie.original_title.split(' ').join('%20') : this.movie.title}&page=1`;
+    xhr.open("GET", url, true)
     xhr.setRequestHeader("X-API-KEY", "a8e8a2e5-2e0c-4c38-8e1c-2f2d46bf3258")
     xhr.send()
     xhr.onload = () => {
       let result = JSON.parse(xhr.response)
-      if (result.films[0].year == this.movie.release_date.slice(0, 4)) {
-        this.kinopoiskId = result.films[0].filmId;
-      }
-      this.canPlay = true;
+      this.kinopoiskId = result.films.find(film => {
+        return film.year.slice(0, 4) == this.movie.release_date.slice(0, 4)
+      }).filmId;
     }
   }
 
   play() {
-
     yo()
-
   }
 
-  initialize() {
-    setTimeout(async () => {
-      this.id = +this.route.snapshot.params['id']
-      this.movie = this.moviesService.getMovie(this.id) || await this.moviesService.fetchMovie(this.id)
-
-      this.searchIdentifier = `${this.movie.title} / ${this.movie.original_title} (${this.movie.release_date.slice(0, 4)})`
-      this.imgPath = this.moviesService.httpConfig.imgBackgroundBaseUrl + this.movie.backdrop_path;
-      this.route.params
-        .subscribe(async (params: Params) => {
-          this.id = +params['id'];
-          this.movie = this.moviesService.getMovie(this.id) || await this.moviesService.fetchMovie(this.id);
-        })
-      let errorCounter = 0;
-      let interval = setInterval(() => {
-        errorCounter++
-        if (this.movie) {
-          clearInterval(interval);
-          this.getKinopoiskId()
-
-        } else if (errorCounter > 50) { console.log("ERROR: movie not found"); clearInterval(interval) }
-      }, 50)
-    }, 0)
-  }
 
 }
 
