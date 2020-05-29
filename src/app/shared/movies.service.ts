@@ -131,7 +131,9 @@ export class MoviesService {
     constructor() { }
 
     getCurrentGenreMoviesPage(genre_id: number) {
-        return this.moviesGenres[genre_id].page
+        return this.moviesGenres.find(genre => {
+            return genre.id == genre_id
+        }).page
     }
 
     getIsGenresMoviesLoaded() {
@@ -208,6 +210,7 @@ export class MoviesService {
         let genre = this.moviesGenres.find(item => {
             return item.id == genreId
         })
+        if (page) genre.page++
         let url: string =
             `${this.httpConfig.baseUrl}/discover/movie?api_key=${this.httpConfig.apiKey}&language=${this.httpConfig.language}&page=${page ? page : ++genre.page}&region=RU&with_genres=${genreId}`;
         let response = await fetch(url, { method: "GET" });

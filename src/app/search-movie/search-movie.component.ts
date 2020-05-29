@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, HostListener } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { MoviesService } from '../shared/movies.service';
 import { Movie } from '../shared/movie.model';
@@ -13,6 +13,7 @@ export class SearchMovieComponent implements OnInit {
   movies: Movie[] = [];
   selected_id: number;
   genre_id: number;
+  isLoadingOnScroll: boolean = false;
 
   @ViewChild('input', { static: false }) input: ElementRef;
 
@@ -73,9 +74,30 @@ export class SearchMovieComponent implements OnInit {
   handlePosterSelect(id: number) {
     this.selected_id = id;
   }
+  @HostListener('window:scroll', ['$event'])
+  async handleScroll(event: any) {
 
-  handleScroll(event: any) {
-    console.log('im in')
-    console.log(event.target)
+    console.log(document.documentElement.getBoundingClientRect().y, document.documentElement.clientHeight)
+    if (!this.isLoadingOnScroll) {
+      let windowRelativeBottom = document.documentElement.getBoundingClientRect().bottom;
+      if (windowRelativeBottom < document.documentElement.clientHeight + 50) {
+        console.log("loading")
+        this.isLoadingOnScroll = true;
+        if (!this.searchQuery) {
+          await this.moviesService.fetchMoviesGenre(this.genre_id)
+          this.movies = this.moviesService.getGenreMovies(this.genre_id)
+          // this.isLoadingOnScroll = false;
+
+        }
+
+        // else {
+        //     await this.moviesService.fetchMoviesSearch(this.searchQuery)
+        //     this.movies = this.moviesService.getSearchedMovies();
+        // }
+        // await this.moviesService.fetchMoviesGenre(this.genre_id, this.moviesService.getCurrentGenreMoviesPage(this.genre_id))
+        // this.isLoadingOnScroll = false;
+      }
+    }
+
   }
 }
