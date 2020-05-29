@@ -1,10 +1,10 @@
-<div class="details__outer">
-    <img [src]="getBgImgUrl()" [alt]="movie.title" class="details__background">
+<div class="details__outer" [ngStyle]="{'background-image': bgImgUrl}">
+    <!-- <img [src]="getBgImgUrl()" [alt]="movie.title" class="details__background"> -->
     <div class="details__inner"></div>
     <div class="details__content">
         <div class="details__text">
           <h3 class="details__title">{{movie.title}}</h3>
-          <h6 class="details__release-date"><span>Дата выхода: </span>{{movie.release_date.slice(0,4)}}</h6>
+          <h6 class="details__release-date">{{movie.release_date.slice(0,4)}}</h6>
           <p class="details__overview" *ngIf="!expanded">
               {{getSlicedOverview()}}<span
               *ngIf="!expanded && movie.overview.split(' ').length >= 15" (click)="expanded=!expanded">...Читать дальше</span></p>
@@ -12,10 +12,11 @@
               <span *ngIf="expanded"
               (click)="expanded=!expanded">Скрыть</span></p>
         </div>
-        <div class="details__player">
-            <img [src]="getImgUrl()" [alt]="movie.title">
+        <div class="details__player" [ngStyle]="{'background-image': imgUrl}">
+            <!-- <img [src]="getImgUrl()" [alt]="movie.title"> -->
             <i (click)="playMovie()" class="large material-icons ">play_circle_filled</i>
         </div>
     </div>
 
 </div>
+ <!-- [ngStyle]="{'background-image': bgImgUrl}" -->

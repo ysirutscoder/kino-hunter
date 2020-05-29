@@ -25,4 +25,11 @@
             [ngStyle]="{'background-image': getImgUrl(movie.backdrop_path)}"></router-outlet>
       </div>
     </div>
+    <!-- <cdk-virtual-scroll-viewport itemSize="500" class="search__result">
+      <li *cdkVirtualFor="let movie of dataSource" class="search__movie">
+        <img *ngIf="movie.poster_path !== undefined && movie.poster_path !== null" [src]="getImgUrl(movie.poster_path)"
+          [alt]="movie.original_title" class="search__poster" [routerLink]="[movie.id]" (click)="handlePosterSelect(movie.id)"
+          queryParamsHandling="merge">
+      </li>
+    </cdk-virtual-scroll-viewport> -->
 </div>

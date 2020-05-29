@@ -17,8 +17,8 @@ export class MoviesListComponent implements OnInit {
 
 
 
-  @ViewChild('searcher', { static: false }) searcher: ElementRef;
-  @ViewChild('searchBtn', { static: false }) searchBtn: ElementRef;
+  @ViewChild('searcher') searcher: ElementRef;
+  @ViewChild('searchBtn') searchBtn: ElementRef;
 
   constructor(private moviesService: MoviesService,
     private router: Router,

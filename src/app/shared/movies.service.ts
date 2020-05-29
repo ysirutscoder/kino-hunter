@@ -1,4 +1,6 @@
 import { Movie } from './movie.model';
+import { Injectable } from "@angular/core";
+@Injectable()
 export class MoviesService {
     private moviesGenres: { id: number, name: string, page: number, movies: Movie[] }[] = [
 

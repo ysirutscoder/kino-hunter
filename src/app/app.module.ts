@@ -3,6 +3,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms'
+import { ScrollingModule } from '@angular/cdk/scrolling'
 
 import { AppComponent } from './app.component';
 import { SiteLayoutComponent } from './shared/layouts/site-layout/site-layout.component';
@@ -28,7 +29,8 @@ import { MovieShortDetailsComponent } from './search-movie/movie-short-details/m
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ScrollingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

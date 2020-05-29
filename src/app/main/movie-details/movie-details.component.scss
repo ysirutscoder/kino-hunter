@@ -3,22 +3,40 @@
 
   &__outer {
     width: 100%;
-    position: fixed;
+    position: absolute;
+    height: 100vh;
     top: 0;
     left: 0;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+    // &::after {
+    //   width: 100%;
+    //   height: 100vh;
+    //   content: '';
+    //   background-image: inherit;
+    //   background-repeat: no-repeat;
+    //   background-position: center;
+    //   background-size: cover;
+    //   position: fixed;
+    //   top: 0;
+    //   left: 0;
+    //   opacity: .667;
+    //   z-index: -999;
+    // }
   }
 
-  &__title {
-    font-size: 3em;
-  }
 
   &__background {
     width: 100%;
     height: auto;
+    opacity: 0.667;
   }
 
   &__inner {
-    background-color: rgba(0, 0, 0, 0.6);
+    // background: linear-gradient(9deg, #000a19, transparent);
+    background: linear-gradient(90deg, #000a19, 60%, #35353550);
     position: absolute;
     top: 0;
     left: 0;
@@ -26,17 +44,29 @@
     height: 100%;
   }
 
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    padding: 50px;
+    margin: 25px;
+    opacity: 1;
+    border: 2px solid #19121d;
+    border-bottom: none;
+    min-height: 100%;
+  }
+
   &__text {
     color: white;
-    max-width: 43%;
+    max-width: 50%;
     padding-right: 3%;
     font-size: 1.2em;
-    max-height: 18.5em;
+    max-height: 30em;
     overflow-y: auto;
     overflow-x: visible;
+    z-index: 100;
 
     & span {
-      color: rgb(199, 199, 199);
+      color: rgb(248, 248, 248);
       margin-left: 10px;
       font-size: 0.95em;
 
@@ -46,29 +76,38 @@
     }
   }
 
+  &__title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 3em;
+    color: #ffe7e6;
+    margin-top: 0.5rem;
+  }
+
+  &__overview {
+    padding-top: 6rem;
+    color: #d6cdc1;
+  }
+
   &__release-date {
+    margin-top: 2rem;
+
     & span {
       color: rgb(40, 255, 40);
     }
+
+    font-size: 1.5em;
+    color: #ffaeae;
   }
 
-  &__content {
-    display: flex;
-    justify-content: space-between;
-    position: absolute;
-    top: 10px;
-    max-width: 90%;
-    left: 5%;
-    right: 5%;
-  }
 
   &__player {
     position: relative;
-
-    img {
-      max-width: 15em;
-      box-shadow: -5px 7px 20px 1px black;
-    }
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 20em;
+    height: 30em;
+    box-shadow: -13px 13px 20px 0px rgba(0, 0, 0, 0.5);
 
     i {
       position: absolute;

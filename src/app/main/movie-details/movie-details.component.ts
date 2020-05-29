@@ -12,6 +12,8 @@ export class MovieDetailsComponent implements OnInit {
   movie: Movie;
   id: number;
   expanded: boolean;
+  bgImgUrl: string;
+  imgUrl: string;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -21,12 +23,14 @@ export class MovieDetailsComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.id = +this.route.snapshot.params['id'];
-    this.movie = await this.moviesService.getMovie(this.id, 'genres');
+    // this.id = +this.route.snapshot.params['id'];
+    // this.movie = await this.moviesService.getMovie(this.id, 'genres');
     this.route.params
       .subscribe(async (params: Params) => {
         this.id = +params['id'];
         this.movie = await this.moviesService.getMovie(this.id, 'genres');
+        this.bgImgUrl = `url('${this.getBgImgUrl()}')`;
+        this.imgUrl = `url('${this.getImgUrl()}')`;
         this.expanded = false;
       })
   }
@@ -46,6 +50,6 @@ export class MovieDetailsComponent implements OnInit {
   getSlicedOverview() {
     return (this.movie.overview.split(' ').length + this.movie.title.split(' ').length) <= 25 ?
       this.movie.overview :
-      this.movie.overview.split(' ').slice(0, (25 - 3 * this.movie.title.split(' ').length)).join(' ');
+      this.movie.overview.split(' ').slice(0, (50 - 3 * this.movie.title.split(' ').length)).join(' ');
   }
 }

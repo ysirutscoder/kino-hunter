@@ -10,15 +10,15 @@
 <div *ngIf="isPageLoaded" class="movies-list__loaded">
   <router-outlet></router-outlet>
   <div class="movies-list__background"></div>
-  <div class="search">
-    <input #searcher [ngClass]="{opened: getIsSearchOpened()}" class="closed" type="text" placeholder="Search for..."
-      [(ngModel)]="searchInputValue" (keyup)="handleSearchClick()">
-    <i class="material-icons search-button" (click)="handleSearchClick()" #searchBtn>
-      search
-    </i>
-  </div>
+  
   <div class="movies-list__outer">
-    <div class="movies-list--shadow"></div>
+    <div class="movies-list__search">
+      <input #searcher [ngClass]="{opened: getIsSearchOpened()}" class="closed" type="text" placeholder="Поиск..."
+        [(ngModel)]="searchInputValue" (keyup)="handleSearchClick()">
+      <i class="material-icons movies-list__search-button" (click)="handleSearchClick()" #searchBtn>
+        search
+      </i>
+    </div>
     <div class="movies-list">
       <div *ngFor="let genre of getMoviesGenres()" >
         <h5 
