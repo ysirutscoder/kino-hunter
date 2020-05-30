@@ -35,24 +35,24 @@ export class WatchMovieComponent implements OnInit {
         this.mediaType = params['media_type']
       })
     this.movie = await this.moviesService.getMovie(this.id, this.findingArea, this.mediaType);
-    this.getKinopoiskId();
-
+    // this.getKinopoiskId();
+    this.searchIdentifier = `${this.movie.title} ${this.movie.release_date.slice(0, 4)}`
     this.imgPath = this.moviesService.httpConfig.imgBackgroundBaseUrl + this.movie.backdrop_path;
     let errorCounter = 0;
     let interval = setInterval(() => {
       errorCounter++
-      if (this.kinopoiskId) {
+      if (this.searchIdentifier) {
         clearInterval(interval)
         this.canPlay = true
       }
-      else if (errorCounter > 100) { console.log("No film finded in KinoP-k"); clearInterval(interval) }
+      else if (errorCounter > 100) { console.log("No film finded"); clearInterval(interval) }
     }, 50)
-    let loading = setTimeout(() => {
-      if (!this.kinopoiskId) {
-        this.searchIdentifier = `${this.movie.title} / ${this.movie.original_title} (${this.movie.release_date.slice(0, 4)})`
-        if (this.searchIdentifier) this.canPlay = true;
-      }
-    }, 5000)
+    // let loading = setTimeout(() => {
+    //   if (!this.kinopoiskId) {
+
+    //     if (this.searchIdentifier) this.canPlay = true;
+    //   }
+    // }, 5000)
   }
 
   getKinopoiskId() {
