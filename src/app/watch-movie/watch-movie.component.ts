@@ -52,7 +52,7 @@ export class WatchMovieComponent implements OnInit {
         this.searchIdentifier = `${this.movie.title} / ${this.movie.original_title} (${this.movie.release_date.slice(0, 4)})`
         if (this.searchIdentifier) this.canPlay = true;
       }
-    }, 2000)
+    }, 5000)
   }
 
   getKinopoiskId() {
