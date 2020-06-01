@@ -202,7 +202,7 @@ export class MoviesService {
             let response = await fetch(url, { method: "GET" });
             let films = await response.json();
             films.results.forEach(movie => {
-                genre.movies.push(new Movie(movie.id, movie.original_title, movie.title, movie.overview, movie.release_date, movie.poster_path, movie.backdrop_path))
+                if (movie.poster_path) genre.movies.push(new Movie(movie.id, movie.original_title, movie.title, movie.overview, movie.release_date, movie.poster_path, movie.backdrop_path, movie.media_type, movie.imdb_id))
             })
             if (films) this.isGenresMoviesLoaded = true;
         })
@@ -218,7 +218,7 @@ export class MoviesService {
         let response = await fetch(url, { method: "GET" });
         let films = await response.json();
         films.results.forEach(movie => {
-            genre.movies.push(new Movie(movie.id, movie.original_title, movie.title, movie.overview, movie.release_date, movie.poster_path, movie.backdrop_path))
+            if (movie.poster_path) genre.movies.push(new Movie(movie.id, movie.original_title, movie.title || movie.name, movie.overview, movie.release_date || movie.first_air_date, movie.poster_path, movie.backdrop_path, movie.media_type, movie.imdb_id))
         })
     }
 
@@ -228,7 +228,7 @@ export class MoviesService {
         let films = await response.json();
         this.searchResultMovies.length = 0
         films.results.forEach(movie => {
-            this.searchResultMovies.push(new Movie(movie.id, movie.original_title, movie.title || movie.name, movie.overview, movie.release_date || movie.first_air_date, movie.poster_path, movie.backdrop_path, movie.media_type))
+            if (movie.poster_path) this.searchResultMovies.push(new Movie(movie.id, movie.original_title, movie.title || movie.name, movie.overview, movie.release_date || movie.first_air_date, movie.poster_path, movie.backdrop_path, movie.media_type, movie.imdb_id))
         })
     }
 
@@ -237,7 +237,7 @@ export class MoviesService {
         let url: string = `${this.httpConfig.baseUrl}/${mediaType ? mediaType : 'movie'}/${id}?api_key=${this.httpConfig.apiKey}&language=${this.httpConfig.language}`;
         let response = await fetch(url, { method: "GET" })
         let movie = await response.json();
-        film = new Movie(movie.id, movie.original_title, movie.title || movie.name, movie.overview, movie.release_date || movie.first_air_date, movie.poster_path, movie.backdrop_path)
+        film = new Movie(movie.id, movie.original_title, movie.title || movie.name, movie.overview, movie.release_date || movie.first_air_date, movie.poster_path, movie.backdrop_path, movie.media_type, movie.imdb_id)
 
         return film
     }

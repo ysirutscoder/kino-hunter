@@ -7,6 +7,7 @@ export class Movie {
         public release_date: string,
         public poster_path: string,
         public backdrop_path: string,
-        public media_type?: string
+        public media_type?: string,
+        public imdb_id?: string
     ) { }
 }

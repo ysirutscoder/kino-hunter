@@ -48,8 +48,8 @@ export class MovieDetailsComponent implements OnInit {
   }
 
   getSlicedOverview() {
-    return (this.movie.overview.split(' ').length + this.movie.title.split(' ').length) <= 25 ?
+    return (this.movie.overview.split(' ').length + this.movie.title.split(' ').length) <= 50 ?
       this.movie.overview :
-      this.movie.overview.split(' ').slice(0, (50 - 3 * this.movie.title.split(' ').length)).join(' ');
+      this.movie.overview.split(' ').slice(0, (50 - 2.5 * this.movie.title.split(' ').length)).join(' ');
   }
 }

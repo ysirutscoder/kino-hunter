@@ -1,11 +1,52 @@
+@import '../../../styles/colors.scss';
+
 .movies-list {
   display: flex;
   flex-direction: column;
   padding-left: 25px;
 
+  &__header {
+    color: white;
+    height: 4em;
+    background: black;
+    position: fixed;
+    top: -4em;
+    width: 100%;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+
+    &-left {
+      display: flex;
+      margin-left: 25px;
+      align-items: center;
+    }
+
+    &-play {
+      font-size: 2.5em;
+      margin-left: 0.6em;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    &-title {
+      font-size: 2em;
+      font-family: 'Oswald',
+        sans-serif;
+      color: #ffe7e6;
+    }
+
+    &--shown {
+      top: 0;
+      animation: header-showing .5s ease;
+    }
+  }
+
   &__background {
     // background-color: rgb(27, 27, 27);
-    background-color: #020819;
+    background-color: $main-background-color;
     position: fixed;
     top: 0;
     left: 0;
@@ -175,11 +216,23 @@
       color: rgb(255, 79, 79);
       font-size: 2em;
       position: absolute;
-      left: calc(100% - 105px);
-      top: 0;
+      right: 75px;
 
       &:hover {
         cursor: pointer;
+      }
+    }
+
+    &--on-header {
+      position: fixed;
+      top: 1em;
+      right: 0;
+      z-index: 999;
+      width: 40%;
+      animation: header-search-showing .5s ease;
+
+      i {
+        right: 0;
       }
     }
   }
@@ -222,6 +275,26 @@
 
   100% {
     opacity: .2;
+  }
+}
+
+@keyframes header-showing {
+  0% {
+    top: -4em;
+  }
+
+  100% {
+    top: 0;
+  }
+}
+
+@keyframes header-search-showing {
+  0% {
+    top: -2em;
+  }
+
+  100% {
+    top: 1em;
   }
 }
 

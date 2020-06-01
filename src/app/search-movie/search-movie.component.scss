@@ -1,8 +1,9 @@
+@import '../../styles/colors';
+
 .search {
 
-
   &__background {
-    background-color: rgb(27, 27, 27);
+    background-color: $main-background-color;
     width: 100%;
     height: 100vh;
     position: fixed;

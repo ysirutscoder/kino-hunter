@@ -8,12 +8,18 @@
 </div>
 
 <div *ngIf="isPageLoaded" class="movies-list__loaded">
+  <header #headerElement class="movies-list__header">
+    <div class="movies-list__header-left">
+      <div class="movies-list__header-title">{{selectedMovie.title}}</div>
+      <i (click)="playMovie()" class="material-icons movies-list__header-play">play_circle_filled</i>
+    </div>
+  </header>
   <router-outlet></router-outlet>
   <div class="movies-list__background"></div>
   
   <div class="movies-list__outer">
-    <div class="movies-list__search">
-      <input #searcher [ngClass]="{opened: getIsSearchOpened()}" class="closed" type="text" placeholder="Поиск..."
+    <div #searcher class="movies-list__search">
+      <input [ngClass]="{opened: getIsSearchOpened()}" class="closed" type="text" placeholder="Поиск..."
         [(ngModel)]="searchInputValue" (keyup)="handleSearchClick()">
       <i class="material-icons movies-list__search-button" (click)="handleSearchClick()" #searchBtn>
         search
@@ -30,6 +36,7 @@
           <div *ngFor="let movie of genre.movies" class="movies-list__item">
             <img 
               [routerLink]="[movie.id]"
+              (click)="handleImgClick(movie.id)"
               [src]="getImgUrl(movie.poster_path)"
               [alt]="movie.original_title"
               class="movies-list__poster">

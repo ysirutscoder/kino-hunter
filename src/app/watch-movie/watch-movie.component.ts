@@ -35,39 +35,36 @@ export class WatchMovieComponent implements OnInit {
         this.mediaType = params['media_type']
       })
     this.movie = await this.moviesService.getMovie(this.id, this.findingArea, this.mediaType);
-    // this.getKinopoiskId();
-    this.searchIdentifier = `${this.movie.title} ${this.movie.release_date.slice(0, 4)}`
-    this.imgPath = this.moviesService.httpConfig.imgBackgroundBaseUrl + this.movie.backdrop_path;
+    this.getKinopoiskId();
+    let numbersRegExp = /[0-9]+$/;
+    
+    this.imgPath = `url(${this.moviesService.httpConfig.imgBackgroundBaseUrl + this.movie.backdrop_path})`;
     let errorCounter = 0;
     let interval = setInterval(() => {
       errorCounter++
-      if (this.searchIdentifier) {
+      if (this.kinopoiskId) {
         clearInterval(interval)
         this.canPlay = true
       }
       else if (errorCounter > 100) { console.log("No film finded"); clearInterval(interval) }
     }, 50)
-    // let loading = setTimeout(() => {
-    //   if (!this.kinopoiskId) {
-
-    //     if (this.searchIdentifier) this.canPlay = true;
-    //   }
-    // }, 5000)
+    let loading = setTimeout(() => {
+      if (!this.kinopoiskId) {
+        this.searchIdentifier = this.movie.title.match(numbersRegExp) ? `${this.movie.title}` : `${this.movie.title} ${this.movie.release_date.slice(0, 4)}`
+        if( this.searchIdentifier) this.canPlay = true;
+      }
+    }, 5000)
   }
 
   getKinopoiskId() {
     let xhr = new XMLHttpRequest()
     let url =
-      `http://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword?keyword=
-      ${this.movie.original_title ? this.movie.original_title.split(' ').join('%20') : this.movie.title}&page=1`;
-    xhr.open("GET", url, true)
-    xhr.setRequestHeader("X-API-KEY", "a8e8a2e5-2e0c-4c38-8e1c-2f2d46bf3258")
+      `https://videocdn.tv/api/short?api_token=dgsl8iCsuXW3YldaHAZ6hJt2p1TM7go6&imdb_id=${this.movie.imdb_id}`;
+    xhr.open("GET", url , true)
     xhr.send()
     xhr.onload = () => {
       let result = JSON.parse(xhr.response)
-      this.kinopoiskId = result.films.find(film => {
-        return film.year.slice(0, 4) == this.movie.release_date.slice(0, 4)
-      }).filmId;
+      this.kinopoiskId = result.data[0].kinopoisk_id || result.data[0].kp_id 
     }
   }
 

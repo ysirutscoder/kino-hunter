@@ -1,7 +1,7 @@
 <div class="player__background"></div>
-<div class="player">
+<div class="player" [ngStyle]="{'background-image': imgPath}">
     <i class="material-icons player__back-btn" [routerLink]="['/list']" >keyboard_backspace</i>
-    <img [src]="imgPath" [alt]="movie.title">
+    <!-- <img [src]="imgPath" [alt]="movie.title"> -->
     <i 
         (click)="play()" 
         class="large material-icons player__play"
@@ -10,7 +10,7 @@
     <div 
         id="yohoho" 
         
-        [attr.data-title]="searchIdentifier"
+        [attr.data-kinopoisk]="kinopoiskId"
         data-player="bazon,kodik,iframe,hdvb,ustore,alloha,pleer,videospider"
         data-resize="1"
         data-autoplay="1"

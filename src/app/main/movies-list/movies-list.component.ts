@@ -14,11 +14,13 @@ export class MoviesListComponent implements OnInit {
   isFetchingOnScroll: boolean = false;
   searchInputValue: string;
   isPageLoaded: boolean = false;
+  selectedMovie: Movie;
 
 
 
   @ViewChild('searcher') searcher: ElementRef;
   @ViewChild('searchBtn') searchBtn: ElementRef;
+  @ViewChild('headerElement') headerElement: ElementRef;
 
   constructor(private moviesService: MoviesService,
     private router: Router,
@@ -43,7 +45,9 @@ export class MoviesListComponent implements OnInit {
     let interval = setInterval(() => {
       if (this.moviesGenres.length !== 0) {
         clearInterval(interval)
-        this.router.navigate([this.moviesGenres[0].movies[Math.ceil(Math.random() * 20)].id], { relativeTo: this.route })
+        let randomMovie = this.moviesGenres[0].movies[Math.ceil(Math.random() * 20)];
+        this.router.navigate([randomMovie.id], { relativeTo: this.route })
+        this.selectedMovie = randomMovie;
         this.isPageLoaded = true;
       }
     }, 200)
@@ -91,11 +95,33 @@ export class MoviesListComponent implements OnInit {
 
   }
 
+  @HostListener('window:scroll')
+  onScrollHeaderControl() {
+    if (document.documentElement.getBoundingClientRect().top +
+      document.documentElement.getBoundingClientRect().height <= 100) {
+
+      this.headerElement.nativeElement.classList.add('movies-list__header--shown')
+      this.searcher.nativeElement.classList.add('movies-list__search--on-header')
+    }
+    else {
+      this.headerElement.nativeElement.classList.remove('movies-list__header--shown')
+      this.searcher.nativeElement.classList.remove('movies-list__search--on-header')
+    }
+  }
+
   getIsSearchOpened() {
     return this.isSearchOpened;
   }
 
   getMoviesGenres() {
     return this.moviesGenres;
+  }
+
+  async handleImgClick(id: number) {
+    this.selectedMovie = await this.moviesService.getMovie(id);
+  }
+
+  playMovie() {
+    this.router.navigate(['/watch', this.selectedMovie.id], { relativeTo: this.route })
   }
 }
