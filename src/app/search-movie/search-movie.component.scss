@@ -35,19 +35,43 @@
   }
 
   &__input {
+    width: 40%;
+
     input {
+      border: 1px solid white;
+      border-radius: 3px;
+      background-color: #19121d;
+      height: 2em;
+      padding-left: 10px;
+      margin-bottom: 0;
+      box-sizing: border-box;
+      position: relative;
       color: white;
-      width: 300px;
-      border-bottom: 1px solid #b60000;
+      width: 100%;
 
-      &:focus {
-        border-bottom: 1px solid #b60000;
-        box-shadow: 0 1px 0 0 #b60000;
+      &::placeholder {
+        color: rgba(255, 246, 246, 0.247);
+      }
 
+      &:focus,
+      &:active {
+        outline: none;
+        box-shadow: none;
+        border-bottom: 1px solid white;
       }
     }
 
-    animation: search-input-moving .8s ease;
+    i {
+      color: rgb(255, 79, 79);
+      font-size: 2em;
+      position: absolute;
+      right: 3%;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
   }
 
   &__poster {

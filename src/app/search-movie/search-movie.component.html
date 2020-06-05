@@ -5,6 +5,9 @@
         keyboard_backspace</i>
       <div class="search__input">
         <input #input type="text" [(ngModel)]="searchQuery" (keyup)="handleTyping()">
+        <i class="material-icons">
+          search
+        </i>
       </div>
     </div>
     <div class="search__result">
