@@ -9,7 +9,7 @@
     <i class="large material-icons player__play player__play--loading" *ngIf="!canPlay">autorenew</i>
     <div 
         id="yohoho" 
-        
+        [attr.data-title]="kinopoiskId ? undefined : searchIdentifier"
         [attr.data-kinopoisk]="kinopoiskId"
         data-player="bazon,kodik,iframe,hdvb,ustore,alloha,pleer,videospider"
         data-resize="1"

@@ -37,7 +37,7 @@ export class WatchMovieComponent implements OnInit {
     this.movie = await this.moviesService.getMovie(this.id, this.findingArea, this.mediaType);
     this.getKinopoiskId();
     let numbersRegExp = /[0-9]+$/;
-    
+
     this.imgPath = `url(${this.moviesService.httpConfig.imgBackgroundBaseUrl + this.movie.backdrop_path})`;
     let errorCounter = 0;
     let interval = setInterval(() => {
@@ -51,20 +51,21 @@ export class WatchMovieComponent implements OnInit {
     let loading = setTimeout(() => {
       if (!this.kinopoiskId) {
         this.searchIdentifier = this.movie.title.match(numbersRegExp) ? `${this.movie.title}` : `${this.movie.title} ${this.movie.release_date.slice(0, 4)}`
-        if( this.searchIdentifier) this.canPlay = true;
+        if (this.searchIdentifier) this.canPlay = true;
       }
     }, 5000)
   }
 
   getKinopoiskId() {
     let xhr = new XMLHttpRequest()
+    console.log(this.movie)
     let url =
       `https://videocdn.tv/api/short?api_token=dgsl8iCsuXW3YldaHAZ6hJt2p1TM7go6&imdb_id=${this.movie.imdb_id}`;
-    xhr.open("GET", url , true)
+    xhr.open("GET", url, true)
     xhr.send()
     xhr.onload = () => {
       let result = JSON.parse(xhr.response)
-      this.kinopoiskId = result.data[0].kinopoisk_id || result.data[0].kp_id 
+      this.kinopoiskId = result.data[0].kinopoisk_id || result.data[0].kp_id
     }
   }
 
