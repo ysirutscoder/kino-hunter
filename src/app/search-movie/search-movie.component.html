@@ -10,7 +10,9 @@
         </i>
       </div>
     </div>
-    <div class="search__result">
+    <div 
+      class="search__result"
+      [ngClass]="{'show-details': selected_id }" >
       <div 
         *ngFor="let movie of movies"
         class="search__movie"
