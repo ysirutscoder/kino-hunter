@@ -47,11 +47,12 @@ export class WatchMovieComponent implements OnInit {
       errorCounter++
       if (this.kinopoiskId) {
         clearInterval(interval)
+
+        this.canPlay = true;
         this.movieSrc = `https://videocdn.so/o2F15pT0LgRn?kp_id=${this.kinopoiskId}&poster=${this.moviesService.httpConfig.imgBackgroundBaseUrl + this.movie.backdrop_path}`;
-        this.movieIframe.nativeElement.setAttribute('src', this.movieSrc)
-        this.movieIframe.nativeElement.onload = () => {
-          this.canPlay = true;
-        }
+        // this.movieIframe.nativeElement.setAttribute('src', this.movieSrc)
+        // this.movieIframe.nativeElement.onload = () => {
+        // }
       }
       else if (errorCounter > 100) { console.log("No film finded"); clearInterval(interval) }
     }, 50)
