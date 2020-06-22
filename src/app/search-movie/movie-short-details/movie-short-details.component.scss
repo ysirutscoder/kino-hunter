@@ -1,8 +1,10 @@
 .short-details {
-
+  position: fixed;
   color: white;
-  padding: 50px;
-  padding-top: 20px;
+  // padding: 50px;
+  // padding-top: 20px;
+  top: 20px;
+  left: 0;
 
   &__title {
     font-size: 3.5em;
@@ -25,3 +27,4 @@
   }
 
 }
+

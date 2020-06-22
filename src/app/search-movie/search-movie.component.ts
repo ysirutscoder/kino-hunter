@@ -1,61 +1,67 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef, HostListener } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
-import { MoviesService } from '../shared/movies.service';
-import { Movie } from '../shared/movie.model';
-import { CollectionViewer, DataSource } from '@angular/cdk/collections';
-import { BehaviorSubject, Subscription, Observable } from 'rxjs';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ViewChild,
+  ElementRef,
+  HostListener,
+} from "@angular/core";
+import { Router, ActivatedRoute, Params } from "@angular/router";
+import { MoviesService } from "../shared/movies.service";
+import { Movie } from "../shared/movie.model";
+import { CollectionViewer, DataSource } from "@angular/cdk/collections";
+import { BehaviorSubject, Subscription, Observable } from "rxjs";
 
 @Component({
-  selector: 'app-search-movie',
-  templateUrl: './search-movie.component.html',
-  styleUrls: ['./search-movie.component.scss']
+  selector: "app-search-movie",
+  templateUrl: "./search-movie.component.html",
+  styleUrls: ["./search-movie.component.scss"],
 })
 export class SearchMovieComponent implements OnInit {
-  searchQuery: string = '';
+  searchQuery: string = "";
   movies: Movie[] = [];
   selected_id: number;
   genre_id: number;
   isLoadingOnScroll: boolean = false;
   // dataSource: MoviesDataSource;
 
-  @ViewChild('input') input: ElementRef;
+  @ViewChild("input") input: ElementRef;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private moviesService: MoviesService
-  ) {
-
-  }
+  ) {}
 
   async ngOnInit() {
     let interval = setInterval(() => {
       if (this.input !== undefined) {
-        clearInterval(interval)
+        clearInterval(interval);
         this.input.nativeElement.focus();
       }
-    }, 5)
-    this.route.queryParams
-      .subscribe(async (queryParams: Params) => {
-        this.searchQuery = queryParams['q']
-        this.genre_id = queryParams['genre_id']
-        if (!this.searchQuery) {
-          if (!this.movies.length) {
-            if (!this.moviesService.getIsGenresMoviesLoaded())
-              await this.moviesService.fetchMoviesGenre(this.genre_id, this.moviesService.getCurrentGenreMoviesPage(this.genre_id))
-          }
-          this.movies = this.moviesService.getGenreMovies(this.genre_id)
+    }, 5);
+    this.route.queryParams.subscribe(async (queryParams: Params) => {
+      this.searchQuery = queryParams["q"];
+      this.genre_id = queryParams["genre_id"];
+      if (!this.searchQuery) {
+        if (!this.movies.length) {
+          if (!this.moviesService.getIsGenresMoviesLoaded())
+            await this.moviesService.fetchMoviesGenre(
+              this.genre_id,
+              this.moviesService.getCurrentGenreMoviesPage(this.genre_id)
+            );
         }
+        this.movies = this.moviesService.getGenreMovies(this.genre_id);
+      } else {
+        setTimeout(async () => {
+          await this.moviesService.fetchMoviesSearch(this.searchQuery);
+          this.movies = this.moviesService.getSearchedMovies();
+        }, 1000);
+      }
+    });
 
-        else {
-          setTimeout(async () => {
-            await this.moviesService.fetchMoviesSearch(this.searchQuery)
-            this.movies = this.moviesService.getSearchedMovies();
-          }, 1000)
-        }
-      })
-
-    if (!this.searchQuery && !this.genre_id) this.router.navigate([], { queryParams: { genre_id: 28 } })
+    if (!this.searchQuery && !this.genre_id)
+      this.router.navigate([], { queryParams: { genre_id: 28 } });
   }
 
   getImgUrl(imgPath: string) {
@@ -63,19 +69,24 @@ export class SearchMovieComponent implements OnInit {
   }
 
   handleTyping() {
-    this.router.navigate([], { queryParams: { q: this.searchQuery }, relativeTo: this.route, queryParamsHandling: "merge" })
+    this.router.navigate([], {
+      queryParams: { q: this.searchQuery },
+      relativeTo: this.route,
+      queryParamsHandling: "merge",
+    });
   }
 
   returnBack() {
-    this.router.navigate(['/list'], { relativeTo: this.route })
+    this.router.navigate(["/list"], { relativeTo: this.route });
   }
 
   isShowDetails(id: number) {
-    return this.selected_id == id
+    return this.selected_id == id;
   }
 
   handlePosterSelect(id: number) {
-    this.selected_id = id;
+    if (this.selected_id === id) this.selected_id = null;
+    else this.selected_id = id;
   }
   // @HostListener('window:scroll', ['$event'])
   // async handleScroll(event: any) {
