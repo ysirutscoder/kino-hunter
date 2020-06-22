@@ -9,6 +9,8 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  width: 100%;
+  height: 100%;
 
   &__background {
     position: fixed;
@@ -29,7 +31,7 @@
   &__back-btn {
     position: fixed;
     z-index: 10;
-    top: 30px;
+    top: 2em;
     left: 30px;
     font-size: 3em;
     color: white;
