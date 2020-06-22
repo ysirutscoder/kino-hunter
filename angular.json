@@ -30,7 +30,9 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": ["src/script.js"]
+            "scripts": [
+              "src/script.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -122,6 +124,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "kino-hunter"
+    }
+  },
+  "defaultProject": "kino-hunter",
+  "cli": {
+    "analytics": "9ede4a6b-473a-44ff-aca8-0d3b1d04baec"
+  }
 }

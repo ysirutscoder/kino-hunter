@@ -16,7 +16,7 @@
   </header>
   <router-outlet></router-outlet>
   <div class="movies-list__background"></div>
-  
+
   <div class="movies-list__outer">
     <div #searcher class="movies-list__search">
       <input [ngClass]="{opened: getIsSearchOpened()}" class="closed" type="text" placeholder="Поиск..."
@@ -27,14 +27,14 @@
     </div>
     <div class="movies-list">
       <div *ngFor="let genre of getMoviesGenres()" >
-        <h5 
-          [routerLink]="['/search']" 
+        <h5
+          [routerLink]="['/search']"
           [queryParams]="{genre_id: genre.id}"
           class="movies-list__genre-name"
           >{{genre.name}}</h5>
         <div (scroll)="onRowScroll($event)" [id]="'genre-id-' + genre.id" class="movies-list__row">
           <div *ngFor="let movie of genre.movies" class="movies-list__item">
-            <img 
+            <img
               [routerLink]="[movie.id]"
               (click)="handleImgClick(movie.id)"
               [src]="getImgUrl(movie.poster_path)"

@@ -46,7 +46,7 @@
 
   &__content {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     padding: 50px;
     margin: 25px;
     opacity: 1;
@@ -59,6 +59,7 @@
     color: white;
     max-width: 50%;
     padding-right: 3%;
+    padding-left: 5em;
     font-size: 1.2em;
     max-height: 30em;
     overflow-y: auto;
