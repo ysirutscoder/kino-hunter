@@ -77,7 +77,6 @@ export class MoviesListComponent implements OnInit {
 
   handleEntering(e: any) {
     if (e.keyCode === 13) this.handleSearchClick()
-
   }
 
   onRowScroll(event: any) {
@@ -86,13 +85,11 @@ export class MoviesListComponent implements OnInit {
     if (scrollOffset < 100 && !this.isFetchingOnScroll) {
       this.isFetchingOnScroll = true;
       this.moviesService.fetchMoviesGenre(genreId);
-
       this.moviesGenres = this.moviesService.getMovies();
       setTimeout(() => {
         this.isFetchingOnScroll = false
       }, 1000)
     }
-
   }
 
   @HostListener('window:scroll')

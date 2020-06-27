@@ -13,6 +13,7 @@ import { MovieDetailsComponent } from './main/movie-details/movie-details.compon
 import { WatchMovieComponent } from './watch-movie/watch-movie.component';
 import { SearchMovieComponent } from './search-movie/search-movie.component';
 import { MovieShortDetailsComponent } from './search-movie/movie-short-details/movie-short-details.component';
+import { SearchInputComponent } from './search-input/search-input.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { MovieShortDetailsComponent } from './search-movie/movie-short-details/m
     WatchMovieComponent,
     SearchMovieComponent,
     MovieShortDetailsComponent,
+    SearchInputComponent,
   ],
   imports: [
     BrowserModule,
