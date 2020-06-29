@@ -8,35 +8,50 @@
 </div>
 
 <div *ngIf="isPageLoaded" class="movies-list__loaded">
-  <header #headerElement class="movies-list__header">
+  <!-- <header #headerElement class="movies-list__header--shown movies-list__header">
     <div class="movies-list__header-left">
       <div class="movies-list__header-title">{{selectedMovie.title}}</div>
       <i (click)="playMovie()" class="material-icons movies-list__header-play">play_circle_filled</i>
     </div>
-  </header>
-  <router-outlet></router-outlet>
+  </header> -->
+  <app-header [selectedMovie]="selectedMovie"></app-header>
   <div class="movies-list__background"></div>
 
   <div class="movies-list__outer">
-    <div #searcher class="movies-list__search">
+    <!-- <div #searcher class="movies-list__search--on-header movies-list__search">
       <input [ngClass]="{opened: getIsSearchOpened()}" class="closed" type="text" placeholder="Поиск..."
         [(ngModel)]="searchInputValue" (keyup)="handleSearchClick()">
       <i class="material-icons movies-list__search-button" (click)="handleSearchClick()" #searchBtn>
         search
       </i>
-    </div>
+    </div> -->
     <div class="movies-list">
-      <div *ngFor="let genre of getMoviesGenres()" >
-        <h5
-          [routerLink]="['/search']"
-          [queryParams]="{genre_id: genre.id}"
-          class="movies-list__genre-name"
-          >{{genre.name}}</h5>
-        <div (scroll)="onRowScroll($event)" [id]="'genre-id-' + genre.id" class="movies-list__row">
+      <div 
+        class="movies-list__genre" 
+        *ngFor="let genre of getMoviesGenres()" 
+        [ngClass]="{'movies-list__genre--selected': genre.id === selectedGenreId }">
+        <router-outlet
+          *ngIf="genre.id === selectedGenreId"
+          #details></router-outlet>
+        <div>
+          <h5 
+            [routerLink]="['/search']"
+            [queryParams]="{genre_id: genre.id}"
+            class="movies-list__genre-name">
+            {{genre.name}}</h5>
+          <div class="controls">
+            <i class="material-icons" (click)="handleArrowsClick('before',genre.id)">navigate_before</i>
+            <i class="material-icons" (click)="handleArrowsClick('next',genre.id)">navigate_next</i>
+          </div>
+        </div>
+        <div 
+          (scroll)="onRowScroll($event)" 
+          [id]="'genre-id-' + genre.id" 
+          class="movies-list__row">
           <div *ngFor="let movie of genre.movies" class="movies-list__item">
             <img
               [routerLink]="[movie.id]"
-              (click)="handleImgClick(movie.id)"
+              (click)="handleImgClick(movie.id, genre.id)"
               [src]="getImgUrl(movie.poster_path)"
               [alt]="movie.original_title"
               class="movies-list__poster">

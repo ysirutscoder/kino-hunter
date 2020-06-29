@@ -1,40 +1,36 @@
-import { SiteLayoutComponent } from './shared/layouts/site-layout/site-layout.component';
-import { RouterModule, Routes } from '@angular/router';
-import { NgModule } from '@angular/core';
-import { MovieDetailsComponent } from './main/movie-details/movie-details.component';
-import { MoviesListComponent } from './main/movies-list/movies-list.component';
-import { WatchMovieComponent } from './watch-movie/watch-movie.component';
-import { SearchMovieComponent } from './search-movie/search-movie.component';
-import { MovieShortDetailsComponent } from './search-movie/movie-short-details/movie-short-details.component';
+import { RouterModule, Routes } from "@angular/router";
+import { NgModule } from "@angular/core";
+import { MovieDetailsComponent } from "./movie-details/movie-details.component";
+import { MoviesListComponent } from "./movies-list/movies-list.component";
+import { WatchMovieComponent } from "./watch-movie/watch-movie.component";
+import { SearchMovieComponent } from "./search-movie/search-movie.component";
+import { MovieShortDetailsComponent } from "./search-movie/movie-short-details/movie-short-details.component";
+import { AppComponent } from "./app.component";
 
 const routes: Routes = [
-    { path: '', redirectTo: '/list', pathMatch: 'full' },
-    {
-        path: '', component: SiteLayoutComponent, children: [
-            {
-                path: 'list', component: MoviesListComponent, children: [
-                    { path: ':id', component: MovieDetailsComponent },
-                ]
-            },
-            { path: 'watch/:id', component: WatchMovieComponent },
-            {
-                path: 'search', component: SearchMovieComponent, children: [
-                    { path: ':id', component: MovieShortDetailsComponent }
-                ]
-            }
-        ]
-    }
+  { path: "", redirectTo: "/list", pathMatch: "full" },
+  {
+    path: "",
+    component: AppComponent,
+    children: [
+      {
+        path: "list",
+        component: MoviesListComponent,
+        children: [{ path: ":id", component: MovieDetailsComponent }],
+      },
+      {
+        path: "search",
+        component: SearchMovieComponent,
+        children: [{ path: ":id", component: MovieShortDetailsComponent }],
+      },
+
+      { path: "watch/:id", component: WatchMovieComponent },
+    ],
+  },
 ];
 
 @NgModule({
-    imports: [
-        RouterModule.forRoot(routes)
-    ],
-    exports: [
-        RouterModule
-    ]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule],
 })
-
-export class AppRoutingModule {
-
-}
+export class AppRoutingModule {}

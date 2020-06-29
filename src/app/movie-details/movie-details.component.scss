@@ -5,11 +5,13 @@
     width: 100%;
     position: absolute;
     height: 100vh;
-    top: 0;
+    top: -80vh;
     left: 0;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+    background-attachment: fixed;
+    z-index: -1;
 
     // &::after {
     //   width: 100%;
@@ -144,6 +146,10 @@
       max-width: 140%;
       text-align: center;
 
+    }
+
+    &__title {
+      font-size: 2em;
     }
 
     &__overview {

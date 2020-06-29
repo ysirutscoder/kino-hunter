@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Movie } from 'src/app/shared/movie.model';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MoviesService } from 'src/app/shared/movies.service';
@@ -14,6 +14,8 @@ export class MovieDetailsComponent implements OnInit {
   expanded: boolean;
   bgImgUrl: string;
   imgUrl: string;
+  @ViewChild("details") details: ElementRef;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -21,6 +23,7 @@ export class MovieDetailsComponent implements OnInit {
 
 
   }
+
 
   async ngOnInit() {
     // this.id = +this.route.snapshot.params['id'];
@@ -33,6 +36,12 @@ export class MovieDetailsComponent implements OnInit {
         this.imgUrl = `url('${this.getImgUrl()}')`;
         this.expanded = false;
       })
+    let interval = setInterval(() => {
+      if (this.details.nativeElement) {
+        clearInterval(interval);
+        this.details.nativeElement.scrollIntoView({block: "center", inline: "nearest", behavior: 'smooth'});
+      }
+    }, 50)
   }
 
   getBgImgUrl() {

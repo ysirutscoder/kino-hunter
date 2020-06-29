@@ -1,0 +1,16 @@
+<header #headerElement class="header">
+  <div class="header-left">
+    <div class="header-title">{{selectedMovie.title}}</div>
+    <i (click)="playMovie()" class="material-icons header-play">play_circle_filled</i>
+  </div>
+  <div #searcher class="search--on-header search">
+    <input 
+				type="text" 
+				placeholder="Поиск..."
+				[(ngModel)]="searchInputValue" 
+				(keyup)="handleSearchClick()">
+    <i class="material-icons search-button" (click)="handleSearchClick()" #searchBtn>
+      search
+    </i>
+  </div>
+</header>

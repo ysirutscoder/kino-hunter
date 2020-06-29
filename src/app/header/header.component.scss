@@ -1,3 +1,42 @@
+.header {
+  color: white;
+  height: 4em;
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+
+  &-left {
+    display: flex;
+    margin-left: 25px;
+    align-items: center;
+  }
+
+  &-play {
+    font-size: 2.5em;
+    margin-left: 0.6em;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &-title {
+    font-size: 2em;
+    font-family: 'Oswald',
+      sans-serif;
+    color: #ffe7e6;
+  }
+
+  //   &--shown {
+  //     top: 0;
+  //     animation: header-showing .5s ease;
+  //   }
+}
+
 .search {
   display: flex;
   align-items: center;
@@ -33,7 +72,7 @@
 
   }
 
-  &__button {
+  &-button {
     color: rgb(255, 79, 79);
     font-size: 2em;
     position: absolute;
@@ -50,7 +89,7 @@
     right: 0;
     z-index: 999;
     width: 40%;
-    animation: header-search-showing .5s ease;
+    // animation: header-search-showing .5s ease;
 
     i {
       right: 0;
