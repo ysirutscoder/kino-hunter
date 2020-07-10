@@ -26,8 +26,6 @@ export class MoviesListComponent implements OnInit {
   selectedMovie: Movie;
   selectedGenreId: number;
 
-  @Output() selectMovie = new EventEmitter<Movie>();
-
   @ViewChild("searcher") searcher: ElementRef;
   @ViewChild("searchBtn") searchBtn: ElementRef;
   @ViewChild("headerElement") headerElement: ElementRef;
@@ -128,7 +126,6 @@ export class MoviesListComponent implements OnInit {
   async handleImgClick(movie_id: number, genre_id: number) {
     this.selectedMovie = await this.moviesService.getMovie(movie_id);
     this.selectedGenreId = genre_id;
-    this.selectMovie.emit(this.selectedMovie);
   }
 
   playMovie() {

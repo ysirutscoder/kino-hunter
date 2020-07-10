@@ -12,6 +12,7 @@ import { WatchMovieComponent } from './watch-movie/watch-movie.component';
 import { SearchMovieComponent } from './search-movie/search-movie.component';
 import { MovieShortDetailsComponent } from './search-movie/movie-short-details/movie-short-details.component';
 import { HeaderComponent } from './header/header.component';
+import { MainComponent } from './main/main.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { HeaderComponent } from './header/header.component';
     SearchMovieComponent,
     MovieShortDetailsComponent,
     HeaderComponent,
+    MainComponent,
   ],
   imports: [
     BrowserModule,

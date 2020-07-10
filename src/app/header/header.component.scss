@@ -29,6 +29,9 @@
     font-family: 'Oswald',
       sans-serif;
     color: #ffe7e6;
+    &:hover {
+        cursor: pointer;
+    }
   }
 
   //   &--shown {

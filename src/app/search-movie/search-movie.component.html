@@ -1,15 +1,15 @@
 <div class="search__outer">
     <div class="search__background"></div>
-    <div class="search__header">
+    <!-- <div class="search__header">
       <i class="medium material-icons search__back-arrow" (click)="returnBack()">
-        keyboard_backspace</i>
-      <div class="search__input">
+        keyboard_backspace</i> -->
+      <!-- <div class="search__input">
         <input #input type="text" [(ngModel)]="searchQuery" (keyup)="handleTyping()">
         <i class="material-icons">
           search
         </i>
-      </div>
-    </div>
+      </div> -->
+    <!-- </div> -->
     <div 
       #result
       class="search__result"
@@ -28,7 +28,9 @@
           queryParamsHandling="merge">
           <router-outlet 
             *ngIf="movie.id == selected_id"
-            [ngStyle]="{'background-image': getImgUrl(movie.backdrop_path)}"></router-outlet>
+            ></router-outlet>
       </div>
     </div>
 </div>
+<!-- 
+            [ngStyle]="{'background-image': getImgUrl(movie.backdrop_path)}" -->

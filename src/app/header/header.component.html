@@ -1,7 +1,8 @@
 <header #headerElement class="header">
   <div class="header-left">
-    <div class="header-title">{{selectedMovie.title}}</div>
-    <i (click)="playMovie()" class="material-icons header-play">play_circle_filled</i>
+		<div class="header-title" (click)="returnBack()">M</div>
+    <!-- <div class="header-title">{{selectedMovie.title}}</div>
+    <i (click)="playMovie()" class="material-icons header-play">play_circle_filled</i> -->
   </div>
   <div #searcher class="search--on-header search">
     <input 

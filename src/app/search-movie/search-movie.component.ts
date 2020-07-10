@@ -54,7 +54,7 @@ export class SearchMovieComponent implements OnInit {
         setTimeout(async () => {
           await this.moviesService.fetchMoviesSearch(this.searchQuery);
           this.movies = this.moviesService.getSearchedMovies();
-        }, 1000);
+        }, 1500);
       }
     });
 
