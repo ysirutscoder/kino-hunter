@@ -51,6 +51,7 @@ export class HeaderComponent implements OnInit {
   }
 
   handleTyping() {
+    console.log('here')
     this.router.navigate([], {
       queryParams: { q: this.searchInputValue },
       relativeTo: this.route,

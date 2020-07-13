@@ -17,6 +17,10 @@ import { Movie } from "../shared/movie.model";
 })
 export class SearchMovieComponent implements OnInit {
   searchQuery: string = "";
+  searchGenres;
+  selectedMovie;
+  filteredSearchGenres = [];
+  selectedGenreId;
   movies: Movie[] = [];
   selected_id: number;
   genre_id: number;
@@ -53,6 +57,10 @@ export class SearchMovieComponent implements OnInit {
       } else {
         setTimeout(async () => {
           await this.moviesService.fetchMoviesSearch(this.searchQuery);
+          this.searchGenres = this.moviesService.getSearchGenres();
+          this.searchGenres.forEach(genre => {
+            if (genre.movies.length !== 0 ) this.filteredSearchGenres.push(genre)
+          })
           this.movies = this.moviesService.getSearchedMovies();
         }, 1500);
       }
@@ -105,6 +113,11 @@ export class SearchMovieComponent implements OnInit {
         }
       }
     }
+  }
+
+  async handleImgClick(movie_id: number, genre_id: number) {
+    this.selectedMovie = await this.moviesService.getMovie(movie_id);
+    this.selectedGenreId = genre_id;
   }
 }
 

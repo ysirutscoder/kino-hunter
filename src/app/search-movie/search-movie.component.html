@@ -10,7 +10,7 @@
         </i>
       </div> -->
     <!-- </div> -->
-    <div 
+    <!-- <div 
       #result
       class="search__result"
       [ngClass]="{'show-details': selected_id }" >
@@ -30,7 +30,25 @@
             *ngIf="movie.id == selected_id"
             ></router-outlet>
       </div>
+    </div> -->
+    
+<div class="movies-list">
+  <div class="movies-list__genre" *ngFor="let genre of filteredSearchGenres"
+    [ngClass]="{'movies-list__genre--selected': genre.id === selectedGenreId }">
+    <router-outlet *ngIf="genre.id === selectedGenreId" #details></router-outlet>
+    <div>
+      <h5 [routerLink]="['/search']" [queryParams]="{genre_id: genre.id}" class="movies-list__genre-name">
+        {{genre.name}}</h5>
     </div>
+    <div [id]="'genre-id-' + genre.id" class="movies-list__row">
+      <div *ngFor="let movie of genre.movies" class="movies-list__item">
+        <img [routerLink]="[movie.id]" (click)="handleImgClick(movie.id, genre.id)" [src]="getImgUrl(movie.poster_path)"
+          [alt]="movie.original_title" class="movies-list__poster">
+      </div>
+    </div>
+  </div>
+</div>
+
 </div>
 <!-- 
             [ngStyle]="{'background-image': getImgUrl(movie.backdrop_path)}" -->
