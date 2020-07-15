@@ -58,6 +58,20 @@ export class MoviesListComponent implements OnInit {
         this.ngOnInit();
       }
     }, 1000);
+
+
+    this.route.queryParams.subscribe(async (queryParams: Params) => {
+      this.moviesGenres.forEach( genre => genre.movies.length = 0);
+        setTimeout(async () => {
+          await this.moviesService.fetchMoviesSearch(queryParams['q']);
+          this.moviesService.getSearchGenres().forEach(genre => {
+            if (genre.movies.length !== 0 ) {
+              
+            }
+          })
+        }, 1500);
+      
+    });
   }
 
   getImgUrl(imgPath: string) {
@@ -97,23 +111,6 @@ export class MoviesListComponent implements OnInit {
       }, 1000);
     }
   }
-
-  // @HostListener("window:scroll")
-  // onScrollHeaderControl() {
-  //   if (
-  //     document.documentElement.getBoundingClientRect().top +
-  //       document.documentElement.getBoundingClientRect().height <=
-  //     100
-  //   ) {
-  //     this.headerElement.nativeElement.classList.add(
-  //       "movies-list__header--shown"
-  //     );
-  //   } else {
-  //     this.headerElement.nativeElement.classList.remove(
-  //       "movies-list__header--shown"
-  //     );
-  //   }
-  // }
 
   getIsSearchOpened() {
     return this.isSearchOpened;

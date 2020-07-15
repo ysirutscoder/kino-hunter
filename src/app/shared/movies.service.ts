@@ -1,13 +1,12 @@
 import { Movie } from "./movie.model";
 import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { Observable } from 'rxjs';
+import { GenreInterface } from './genres.interface';
+
 @Injectable()
 export class MoviesService {
-  private moviesGenres: {
-    id: number;
-    name: string;
-    page: number;
-    movies: Movie[];
-  }[] = [
+  private moviesGenres: GenreInterface[] = [
     {
       id: 28,
       name: "Боевики",
@@ -134,7 +133,7 @@ export class MoviesService {
     imgBackgroundBaseUrl: "https://image.tmdb.org/t/p/w1280/",
   };
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   getCurrentGenreMoviesPage(genre_id: number) {
     return this.moviesGenres.find((genre) => {
@@ -268,10 +267,10 @@ export class MoviesService {
     let url: string = `${this.httpConfig.baseUrl}/search/multi?api_key=${this.httpConfig.apiKey}&language=${this.httpConfig.language}&query=${searchQuery}&page=1&include_adult=false`;
     let response = await fetch(url, { method: "GET" });
     let films = await response.json();
-      this.searchResultMovies.length = 0;
-      this.searchGenres.forEach(genre => {
-          genre.movies.length = 0;
-      })
+    this.searchResultMovies.length = 0;
+    this.searchGenres.forEach((genre) => {
+      genre.movies.length = 0;
+    });
     films.results.forEach((movie) => {
       const filmToPush = new Movie(
         movie.id,
@@ -292,7 +291,7 @@ export class MoviesService {
             (element) => element.id == movie.genre_ids[0]
           )
         ].movies.push(filmToPush);
-        }
+      }
     });
   }
 
@@ -318,5 +317,14 @@ export class MoviesService {
     );
 
     return film;
+  }
+
+  httpFetchMovie(): Observable<Movie[]> {
+    const url = `${this.httpConfig.baseUrl}/${
+      mediaType ? mediaType : "movie"
+    }/${id}?api_key=${this.httpConfig.apiKey}&language=${
+      this.httpConfig.language
+    }`;
+    return this.http.get();
   }
 }

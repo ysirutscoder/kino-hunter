@@ -38,7 +38,8 @@ export class HeaderComponent implements OnInit {
 
   handleSearchClick() {
     if (this.searchInputValue.length > 0) {
-      this.router.navigate(["/search"], {
+      // this.router.navigate(["/search"], {
+        this.router.navigate([], {
         queryParams: { q: this.searchInputValue },
         relativeTo: this.route,
       });
