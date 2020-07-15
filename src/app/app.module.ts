@@ -13,6 +13,7 @@ import { SearchMovieComponent } from './search-movie/search-movie.component';
 import { MovieShortDetailsComponent } from './search-movie/movie-short-details/movie-short-details.component';
 import { HeaderComponent } from './header/header.component';
 import { MainComponent } from './main/main.component';
+import { GenresListComponent } from './genres-list/genres-list.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { MainComponent } from './main/main.component';
     MovieShortDetailsComponent,
     HeaderComponent,
     MainComponent,
+    GenresListComponent,
   ],
   imports: [
     BrowserModule,

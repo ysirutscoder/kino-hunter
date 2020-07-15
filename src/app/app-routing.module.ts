@@ -7,6 +7,7 @@ import { SearchMovieComponent } from "./search-movie/search-movie.component";
 import { MovieShortDetailsComponent } from "./search-movie/movie-short-details/movie-short-details.component";
 import { AppComponent } from "./app.component";
 import { MainComponent } from "./main/main.component";
+import { GenresListComponent } from './genres-list/genres-list.component';
 
 const routes: Routes = [
   { path: "", redirectTo: "/list", pathMatch: "full" },
@@ -16,7 +17,7 @@ const routes: Routes = [
     children: [
       {
         path: "list",
-        component: MoviesListComponent,
+        component: GenresListComponent,
         children: [{ path: ":id", component: MovieDetailsComponent }],
       },
 
@@ -29,14 +30,7 @@ const routes: Routes = [
     ],
   },
 
-  { path: "watch/:id", component: WatchMovieComponent },
-  //   {
-  //     path: "",
-  //     component: MainComponent,
-  //     children: [
-
-  //     ],
-  //   },
+  { path: "watch/:id", component: WatchMovieComponent }
 ];
 
 @NgModule({

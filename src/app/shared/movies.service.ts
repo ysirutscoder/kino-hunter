@@ -198,6 +198,10 @@ export class MoviesService {
     return this.searchGenres.slice();
   }
 
+  getGenres() {
+    return this.moviesGenres.slice();
+  }
+
   getSearchedMovies() {
     return this.searchResultMovies.slice();
   }
@@ -317,14 +321,5 @@ export class MoviesService {
     );
 
     return film;
-  }
-
-  httpFetchMovie(): Observable<Movie[]> {
-    const url = `${this.httpConfig.baseUrl}/${
-      mediaType ? mediaType : "movie"
-    }/${id}?api_key=${this.httpConfig.apiKey}&language=${
-      this.httpConfig.language
-    }`;
-    return this.http.get();
   }
 }
