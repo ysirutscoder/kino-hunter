@@ -2,7 +2,7 @@ import { Movie } from "./movie.model";
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from 'rxjs';
-import { GenreInterface } from './genres.interface';
+import { GenreInterface } from './genre.interface';
 
 @Injectable()
 export class MoviesService {

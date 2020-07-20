@@ -17,8 +17,8 @@ const routes: Routes = [
     children: [
       {
         path: "list",
-        component: GenresListComponent,
-        children: [{ path: ":id", component: MovieDetailsComponent }],
+        component: MoviesListComponent,
+        // children: [{ path: ":id", component: MovieDetailsComponent }],
       },
 
         {

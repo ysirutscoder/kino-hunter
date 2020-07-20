@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { GenreInterface } from "../shared/genres.interface";
+import { GenreInterface } from "../shared/genre.interface";
 import { MoviesService } from '../shared/movies.service';
 
 @Component({
@@ -16,8 +16,7 @@ export class GenresListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(1)
+    
     this.genres = this.moviesService.getGenres();
-    console.log(this.moviesService.getGenres())
   }
 }

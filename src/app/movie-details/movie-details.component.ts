@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { Movie } from 'src/app/shared/movie.model';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MoviesService } from 'src/app/shared/movies.service';
@@ -9,7 +9,7 @@ import { MoviesService } from 'src/app/shared/movies.service';
   styleUrls: ['./movie-details.component.scss']
 })
 export class MovieDetailsComponent implements OnInit {
-  movie: Movie;
+  @Input() movie: Movie;
   id: number;
   expanded: boolean;
   bgImgUrl: string;
@@ -25,31 +25,31 @@ export class MovieDetailsComponent implements OnInit {
   }
 
 
-  async ngOnInit() {
+  ngOnInit() {
     // this.id = +this.route.snapshot.params['id'];
     // this.movie = await this.moviesService.getMovie(this.id, 'genres');
-    this.route.params
-      .subscribe(async (params: Params) => {
-        this.id = +params['id'];
-        this.movie = await this.moviesService.getMovie(this.id, 'genres');
-        this.bgImgUrl = `url('${this.getBgImgUrl()}')`;
-        this.imgUrl = `url('${this.getImgUrl()}')`;
-        this.expanded = false;
-      })
-    let interval = setInterval(() => {
-      if (this.details.nativeElement) {
-        clearInterval(interval);
-        this.details.nativeElement.scrollIntoView({block: "center", inline: "nearest", behavior: 'smooth'});
-      }
-    }, 50)
+    // this.route.params
+    //   .subscribe(async (params: Params) => {
+    //     this.id = +params['id'];
+    //     this.movie = await this.moviesService.getMovie(this.id, 'genres');
+    //     this.bgImgUrl = `url('${this.getBgImgUrl()}')`;
+    //     this.imgUrl = `url('${this.getImgUrl()}')`;
+    //     this.expanded = false;
+    //   })
+    // let interval = setInterval(() => {
+    //   if (this.details.nativeElement) {
+    //     clearInterval(interval);
+    //     this.details.nativeElement.scrollIntoView({block: "center", inline: "nearest", behavior: 'smooth'});
+    //   }
+    // }, 50)
   }
 
   getBgImgUrl() {
-    return this.moviesService.httpConfig.imgBackgroundBaseUrl + this.movie.backdrop_path
+    return `url(${this.moviesService.httpConfig.imgBackgroundBaseUrl + this.movie.backdrop_path})`
   }
 
   getImgUrl() {
-    return this.moviesService.httpConfig.imgBaseUrl + this.movie.poster_path
+    return `url(${this.moviesService.httpConfig.imgBaseUrl + this.movie.poster_path})`
   }
 
   playMovie() {

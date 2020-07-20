@@ -1,4 +1,7 @@
 <div class="movies-list">
-  {{ moviesProps.length }}
-  <div class="movies-list__item" *ngFor="let movie of movies"></div>
+  <div class="movies-list__movie" [ngClass]="{'movies-list__movie--show-details': movie.id === selectedId }" *ngFor="let movie of movies$ | async">
+    <img class="movies-list__img" [src]="getImgBaseUrl() + movie.poster_path" alt="movie.original_title" (click)="selectMovie(movie.id)">
+    <app-movie-details *ngIf="selectedId === movie.id" [movie]="movie"></app-movie-details>
+  </div>
 </div>
+<button (click)="fetchMovies()">fetch</button>

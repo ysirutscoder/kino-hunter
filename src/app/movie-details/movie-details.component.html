@@ -1,7 +1,7 @@
-<div #details class="details__outer" [ngStyle]="{'background-image': bgImgUrl}">
+<div #details class="details__outer" [ngStyle]="{'background-image': getBgImgUrl()}">
     <div class="details__inner"></div>
     <div class="details__content">
-        <div class="details__player" [ngStyle]="{'background-image': imgUrl}">
+        <div class="details__player" [ngStyle]="{'background-image': getImgUrl()}">
             <i (click)="playMovie()" class="large material-icons ">play_circle_filled</i>
         </div>
         <div class="details__text">
