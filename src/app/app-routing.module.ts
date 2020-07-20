@@ -19,6 +19,14 @@ const routes: Routes = [
         component: MoviesListComponent,
         children: [{ path: ":id", component: MovieDetailsComponent }],
       },
+<<<<<<< HEAD
+=======
+      {
+        path: "search",
+        component: SearchMovieComponent,
+        children: [{ path: ":id", component: MovieDetailsComponent }],
+      },
+>>>>>>> 4b1f592... searhc fixed
 
         {
             path: "search",

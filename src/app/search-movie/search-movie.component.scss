@@ -1,6 +1,9 @@
-@import '../../styles/colors';
+@import "../../styles/colors";
 
 .search {
+  &__outer {
+    background-color: $main-background-color;
+  }
 
   &__background {
     background-color: $main-background-color;
@@ -27,32 +30,12 @@
   }
 
   &__result {
-    // display: flex;
-    // flex-wrap: wrap;
-    // justify-content: space-around;
-    display: grid;
-    gap: 10px;
-    grid-template-columns: repeat(6, 1fr);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-end;
     padding: 60px 2.5%;
     position: relative;
-
-    @media screen and (max-width: 1200px) {
-      grid-template-columns: repeat(5, 1fr);
-    }
-
-    @media screen and (max-width: 998px) {
-      grid-template-columns: repeat(4, 1fr);
-    }
-
-    @media screen and (max-width: 768px) {
-      grid-template-columns: repeat(3, 1fr);
-    }
-
-    @media screen and (max-width: 554px) {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-
   }
 
   &__input {
@@ -92,7 +75,6 @@
         cursor: pointer;
       }
     }
-
   }
 
   &__poster {
@@ -107,9 +89,8 @@
 
   &__movie {
     display: flex;
-    position: relative;
+    // position: relative;
   }
-
 
   &__back-arrow {
     color: rgb(182, 182, 182);
@@ -122,14 +103,14 @@
 }
 
 .show-details {
-  transform: translate(0, 30%);
-  animation: details-showing .5s ease;
+  transition: 0.5s;
+  margin-top: 80vh;
 }
 
 .selected {
   // margin-bottom: 2em;
   // animation: details-appear .5s ease;
-  position: relative;
+  // position: relative;
 }
 
 ::-webkit-scrollbar {
