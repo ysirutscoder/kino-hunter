@@ -1,8 +1,8 @@
 .details {
-  font-family: 'Nanum Gothic', sans-serif;
+  font-family: "Nanum Gothic", sans-serif;
 
   &__outer {
-    // width: 100vw;
+    width: 100%;
     position: absolute;
     height: 100vh;
     top: -80vh;
@@ -28,7 +28,6 @@
     //   z-index: -999;
     // }
   }
-
 
   &__background {
     width: 100%;
@@ -81,7 +80,7 @@
   }
 
   &__title {
-    font-family: 'Oswald', sans-serif;
+    font-family: "Oswald", sans-serif;
     font-size: 3em;
     color: #ffe7e6;
     margin-top: 0.5rem;
@@ -103,7 +102,6 @@
     color: #ffaeae;
   }
 
-
   &__player {
     position: relative;
     background-size: cover;
@@ -120,7 +118,8 @@
       transform: translate(-50%, -50%);
       color: white;
       text-shadow: 0 0 2px black;
-      transition: all ease .3s;
+      transition: all ease 0.3s;
+      z-index: 100;
 
       &:hover {
         cursor: pointer;
@@ -145,7 +144,6 @@
       padding: 0;
       max-width: 140%;
       text-align: center;
-
     }
 
     &__title {
@@ -156,13 +154,11 @@
       display: none;
     }
   }
-
 }
 
 /* width */
 ::-webkit-scrollbar {
   width: 5px;
-
 }
 
 /* Track */
@@ -212,7 +208,6 @@
 //       max-width: 100%;
 //       font-size: 1.2em;
 //       max-height: 16em;
-
 
 //       & span {
 //         color: rgb(199, 199, 199);

@@ -1,20 +1,40 @@
-<div #details class="details__outer" [ngStyle]="{'background-image': getBgImgUrl()}">
-    <div class="details__inner"></div>
-    <div class="details__content">
-        <div class="details__player" [ngStyle]="{'background-image': getImgUrl()}">
-            <i (click)="playMovie()" class="large material-icons ">play_circle_filled</i>
-        </div>
-        <div class="details__text">
-          <h3 class="details__title">{{movie.title}}</h3>
-          <h6 class="details__release-date">{{movie.release_date.slice(0,4)}}</h6>
-          <p class="details__overview" *ngIf="!expanded">
-              {{getSlicedOverview()}}<span
-              *ngIf="!expanded && (this.movie.overview.split(' ').length + this.movie.title.split(' ').length) >= 50"
-              (click)="expanded=!expanded">...Читать дальше</span></p>
-          <p class="details__overview" *ngIf="expanded">{{movie.overview}}
-              <span *ngIf="expanded"
-              (click)="expanded=!expanded">Скрыть</span></p>
-        </div>
+<div
+  #details
+  class="details__outer"
+  [ngStyle]="{ 'background-image': getBgImgUrl() }"
+>
+  <div class="details__inner"></div>
+  <div class="details__content">
+    <div
+      class="details__player"
+      [ngStyle]="{ 'background-image': getImgUrl() }"
+    >
+      <i [routerLink]="['/watch', movie.id]" class="large material-icons"
+        >play_circle_filled</i
+      >
     </div>
-
+    <div class="details__text">
+      <h3 class="details__title">{{ movie.title }}</h3>
+      <h6 class="details__release-date">
+        {{ movie.release_date.slice(0, 4) }}
+      </h6>
+      <p class="details__overview" *ngIf="!expanded">
+        {{ getSlicedOverview()
+        }}<span
+          *ngIf="
+            !expanded &&
+            this.movie.overview.split(' ').length +
+              this.movie.title.split(' ').length >=
+              50
+          "
+          (click)="expanded = !expanded"
+          >...Читать дальше</span
+        >
+      </p>
+      <p class="details__overview" *ngIf="expanded">
+        {{ movie.overview }}
+        <span *ngIf="expanded" (click)="expanded = !expanded">Скрыть</span>
+      </p>
+    </div>
+  </div>
 </div>

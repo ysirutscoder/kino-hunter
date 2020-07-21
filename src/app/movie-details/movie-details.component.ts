@@ -1,12 +1,19 @@
-import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
-import { Movie } from 'src/app/shared/movie.model';
-import { ActivatedRoute, Params, Router } from '@angular/router';
-import { MoviesService } from 'src/app/shared/movies.service';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  Input,
+  AfterViewInit,
+} from "@angular/core";
+import { Movie } from "src/app/shared/movie.model";
+import { ActivatedRoute, Params, Router } from "@angular/router";
+import { MoviesService } from "src/app/shared/movies.service";
 
 @Component({
-  selector: 'app-movie-details',
-  templateUrl: './movie-details.component.html',
-  styleUrls: ['./movie-details.component.scss']
+  selector: "app-movie-details",
+  templateUrl: "./movie-details.component.html",
+  styleUrls: ["./movie-details.component.scss"],
 })
 export class MovieDetailsComponent implements OnInit {
   @Input() movie: Movie;
@@ -19,11 +26,15 @@ export class MovieDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private moviesService: MoviesService) {
+    private moviesService: MoviesService
+  ) {}
 
-
-  }
-
+  // ngAfterViewInit() {
+  //   this.details.nativeElement.scrollIntoView({
+  //     behavior: "smooth",
+  //     block: "top",
+  //   });
+  // }
 
   ngOnInit() {
     // this.id = +this.route.snapshot.params['id'];
@@ -36,29 +47,38 @@ export class MovieDetailsComponent implements OnInit {
     //     this.imgUrl = `url('${this.getImgUrl()}')`;
     //     this.expanded = false;
     //   })
-    // let interval = setInterval(() => {
-    //   if (this.details.nativeElement) {
-    //     clearInterval(interval);
-    //     this.details.nativeElement.scrollIntoView({block: "center", inline: "nearest", behavior: 'smooth'});
-    //   }
-    // }, 50)
+    let interval = setInterval(() => {
+      if (this.details.nativeElement) {
+        clearInterval(interval);
+        this.details.nativeElement.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+    }, 50);
   }
 
   getBgImgUrl() {
-    return `url(${this.moviesService.httpConfig.imgBackgroundBaseUrl + this.movie.backdrop_path})`
+    return `url(${
+      this.moviesService.httpConfig.imgBackgroundBaseUrl +
+      this.movie.backdrop_path
+    })`;
   }
 
   getImgUrl() {
-    return `url(${this.moviesService.httpConfig.imgBaseUrl + this.movie.poster_path})`
-  }
-
-  playMovie() {
-    this.router.navigate(['/watch', this.id], { relativeTo: this.route })
+    return `url(${
+      this.moviesService.httpConfig.imgBaseUrl + this.movie.poster_path
+    })`;
   }
 
   getSlicedOverview() {
-    return (this.movie.overview.split(' ').length + this.movie.title.split(' ').length) <= 50 ?
-      this.movie.overview :
-      this.movie.overview.split(' ').slice(0, (50 - 2.5 * this.movie.title.split(' ').length)).join(' ');
+    return this.movie.overview.split(" ").length +
+      this.movie.title.split(" ").length <=
+      50
+      ? this.movie.overview
+      : this.movie.overview
+          .split(" ")
+          .slice(0, 50 - 2.5 * this.movie.title.split(" ").length)
+          .join(" ");
   }
 }

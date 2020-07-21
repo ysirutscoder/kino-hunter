@@ -1,13 +1,15 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import { Movie } from '../shared/movie.model';
-import { MoviesService } from '../shared/movies.service';
-import { Router, ActivatedRoute, Params } from '@angular/router';
-import { yo } from '../../script.js'
+import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
+import { Movie } from "../shared/movie.model";
+import { MoviesService } from "../shared/movies.service";
+import { Router, ActivatedRoute, Params } from "@angular/router";
+import { yo } from "../../script.js";
+import { WatchMovieService } from "../shared/watch-movie.service";
 
 @Component({
-  selector: 'app-watch-movie',
-  templateUrl: './watch-movie.component.html',
-  styleUrls: ['./watch-movie.component.scss']
+  selector: "app-watch-movie",
+  templateUrl: "./watch-movie.component.html",
+  styleUrls: ["./watch-movie.component.scss"],
+  providers: [WatchMovieService],
 })
 export class WatchMovieComponent implements OnInit {
   movie: Movie;
@@ -21,65 +23,78 @@ export class WatchMovieComponent implements OnInit {
   findByTitle: boolean = true;
   movieSrc: string;
 
-  @ViewChild('movieIframe') movieIframe: ElementRef;
+  @ViewChild("movieIframe") movieIframe: ElementRef;
 
   constructor(
     private moviesService: MoviesService,
     private route: ActivatedRoute,
-  ) { }
+    private watchMovieService: WatchMovieService
+  ) {}
 
   async ngOnInit() {
-    this.route.params
-      .subscribe((params: Params) => {
-        this.id = +params['id'];
-      })
-    this.route.queryParams
-      .subscribe((params: Params) => {
-        this.mediaType = params['media_type']
-      })
-    this.movie = await this.moviesService.getMovie(this.id, this.findingArea, this.mediaType);
-    this.getKinopoiskId();
+    this.route.params.subscribe((params: Params) => {
+      this.id = +params["id"];
+    });
+    this.route.queryParams.subscribe((params: Params) => {
+      this.mediaType = params["media_type"];
+    });
+    // this.movie = await this.moviesService.getMovie(
+    //   this.id,
+    //   this.findingArea,
+    //   this.mediaType
+    // );
+    // this.getKinopoiskId();
+    this.moviesService.getMovieTry(this.id).subscribe((movie: Movie) => {
+      this.movie = movie;
+      this.imgPath = `url(${
+        this.moviesService.httpConfig.imgBackgroundBaseUrl +
+        this.movie.backdrop_path
+      })`;
+      this.watchMovieService
+        .getKpId(this.movie.imdb_id)
+        .subscribe((kp_id: number) => {
+          this.kinopoiskId = kp_id;
+          this.canPlay = true;
+        });
+    });
     let numbersRegExp = /[0-9]+$/;
 
-    this.imgPath = `url(${this.moviesService.httpConfig.imgBackgroundBaseUrl + this.movie.backdrop_path})`;
     let errorCounter = 0;
-    let interval = setInterval(() => {
-      errorCounter++
-      if (this.kinopoiskId) {
-        clearInterval(interval)
+    // let interval = setInterval(() => {
+    //   errorCounter++
+    //   if (this.kinopoiskId) {
+    //     clearInterval(interval)
 
-        this.canPlay = true;
-        this.movieSrc = `https://videocdn.so/o2F15pT0LgRn?kp_id=${this.kinopoiskId}&poster=${this.moviesService.httpConfig.imgBackgroundBaseUrl + this.movie.backdrop_path}`;
-        // this.movieIframe.nativeElement.setAttribute('src', this.movieSrc)
-        // this.movieIframe.nativeElement.onload = () => {
-        // }
-      }
-      else if (errorCounter > 100) { console.log("No film finded"); clearInterval(interval) }
-    }, 50)
+    //     this.canPlay = true;
+    //     this.movieSrc = `https://videocdn.so/o2F15pT0LgRn?kp_id=${this.kinopoiskId}&poster=${this.moviesService.httpConfig.imgBackgroundBaseUrl + this.movie.backdrop_path}`;
+    //     // this.movieIframe.nativeElement.setAttribute('src', this.movieSrc)
+    //     // this.movieIframe.nativeElement.onload = () => {
+    //     // }
+    //   }
+    //   else if (errorCounter > 100) { console.log("No film finded"); clearInterval(interval) }
+    // }, 50)
     let loading = setTimeout(() => {
       if (!this.kinopoiskId) {
-        this.searchIdentifier = this.movie.title.match(numbersRegExp) ? `${this.movie.title}` : `${this.movie.title} ${this.movie.release_date.slice(0, 4)}`
+        this.searchIdentifier = this.movie.title.match(numbersRegExp)
+          ? `${this.movie.title}`
+          : `${this.movie.title} ${this.movie.release_date.slice(0, 4)}`;
         if (this.searchIdentifier) this.canPlay = true;
       }
-    }, 5000)
+    }, 5000);
   }
 
   getKinopoiskId() {
-    let xhr = new XMLHttpRequest()
-    let url =
-      `https://videocdn.tv/api/short?api_token=dgsl8iCsuXW3YldaHAZ6hJt2p1TM7go6&imdb_id=${this.movie.imdb_id}`;
-    xhr.open("GET", url, true)
-    xhr.send()
+    let xhr = new XMLHttpRequest();
+    let url = `https://videocdn.tv/api/short?api_token=dgsl8iCsuXW3YldaHAZ6hJt2p1TM7go6&imdb_id=${this.movie.imdb_id}`;
+    xhr.open("GET", url, true);
+    xhr.send();
     xhr.onload = () => {
-      let result = JSON.parse(xhr.response)
+      let result = JSON.parse(xhr.response);
       this.kinopoiskId = result.data[0].kinopoisk_id || result.data[0].kp_id;
-    }
+    };
   }
 
   play() {
-    yo()
+    yo();
   }
-
-
 }
-

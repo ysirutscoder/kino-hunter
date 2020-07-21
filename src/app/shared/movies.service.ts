@@ -1,7 +1,7 @@
 import { Movie } from "./movie.model";
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Observable } from 'rxjs';
+import { Observable, Subscriber } from 'rxjs';
 import { GenreInterface } from './genre.interface';
 
 @Injectable()
@@ -180,6 +180,21 @@ export class MoviesService {
     } else {
       return this.fetchMovie(id, media_type);
     }
+  }
+
+  getMovieTry(id: number): Observable<Movie> {
+    const obs$ = new Observable<Movie>(subscriber => {
+      this.moviesGenres.find((genre) => {
+        return genre.movies.find((movie) => {
+          if (movie.id == id) {
+            subscriber.next(movie)
+            return true;
+          }
+          return false;
+        });
+      });
+    })
+    return obs$;
   }
 
   getMovies() {
