@@ -24,6 +24,7 @@
           [routerLink]="[movie.id]"
           (click)="handlePosterSelect(movie.id)"
           queryParamsHandling="merge">
+          <!-- <app-movie-details *ngIf="movie.id == selected_id" [movie]="movie"></app-movie-details> -->
           <router-outlet 
             *ngIf="movie.id == selected_id"
             ></router-outlet>
