@@ -2,20 +2,20 @@
 <div class="player" [ngStyle]="{'background-image': imgPath}">
     <i class="material-icons player__back-btn" [routerLink]="['/list']" >keyboard_backspace</i>
     <!-- <img [src]="imgPath" [alt]="movie.title"> -->
-    <!-- <i
+    <i
         (click)="play()"
         class="large material-icons player__play"
-        *ngIf="canPlay">play_circle_filled</i> -->
+        *ngIf="canPlay">play_circle_filled</i>
     <i class="large material-icons player__play player__play--loading" *ngIf="!canPlay">autorenew</i>
-    <!-- <div
+    <div
         id="yohoho"
         [attr.data-title]="kinopoiskId ? undefined : searchIdentifier"
         [attr.data-kinopoisk]="kinopoiskId"
         data-player="bazon,kodik,iframe,hdvb,ustore,alloha,pleer,videospider"
         data-resize="1"
         data-autoplay="1"
-        ></div> -->
-        <iframe
+        ></div>
+        <!-- <iframe
                 #movieIframe
                 width="100%"
                 height="100%"
@@ -23,7 +23,7 @@
                 source="720"
                 allowfullscreen>
 
-        </iframe>
+        </iframe> -->
 </div>
 
 <!-- [attr.data-kinopoisk]="kinopoiskId"

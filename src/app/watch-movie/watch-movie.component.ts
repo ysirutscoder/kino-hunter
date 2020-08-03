@@ -58,11 +58,12 @@ export class WatchMovieComponent implements OnInit {
         }&poster=${
           this.moviesService.httpConfig.imgBackgroundBaseUrl +
           this.movie.backdrop_path
-        }`;
-        this.movieIframe.nativeElement.setAttribute("src", this.movieSrc);
-        this.movieIframe.nativeElement.onload = () => {
-          this.canPlay = true;
-        };
+          }`;
+        this.canPlay = true;
+        // this.movieIframe.nativeElement.setAttribute("src", this.movieSrc);
+        // this.movieIframe.nativeElement.onload = () => {
+          // this.canPlay = true;
+        // };
       } else if (errorCounter > 100) {
         console.log("No film finded");
         clearInterval(interval);
