@@ -44,6 +44,7 @@ export class SearchMovieComponent implements OnInit {
     }, 5);
     this.route.queryParams.subscribe(async (queryParams: Params) => {
       this.searchQuery = queryParams["q"];
+      console.log(this.searchQuery)
       this.genre_id = queryParams["genre_id"];
       if (!this.searchQuery) {
         if (!this.movies.length) {
@@ -57,10 +58,10 @@ export class SearchMovieComponent implements OnInit {
       } else {
         setTimeout(async () => {
           await this.moviesService.fetchMoviesSearch(this.searchQuery);
-          this.searchGenres = this.moviesService.getSearchGenres();
-          this.searchGenres.forEach(genre => {
-            if (genre.movies.length !== 0 ) this.filteredSearchGenres.push(genre)
-          })
+          // this.searchGenres = this.moviesService.getSearchGenres();
+          // this.searchGenres.forEach(genre => {
+          //   if (genre.movies.length !== 0 ) this.filteredSearchGenres.push(genre)
+          // })
           this.movies = this.moviesService.getSearchedMovies();
         }, 1500);
       }

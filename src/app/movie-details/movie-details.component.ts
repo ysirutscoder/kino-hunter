@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { Movie } from 'src/app/shared/movie.model';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MoviesService } from 'src/app/shared/movies.service';
@@ -9,7 +9,7 @@ import { MoviesService } from 'src/app/shared/movies.service';
   styleUrls: ['./movie-details.component.scss']
 })
 export class MovieDetailsComponent implements OnInit {
-  movie: Movie;
+  @Input() movie: Movie;
   id: number;
   expanded: boolean;
   bgImgUrl: string;

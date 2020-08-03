@@ -1,16 +1,14 @@
 <div class="search__outer">
     <div class="search__background"></div>
     <!-- <div class="search__header">
-      <i class="medium material-icons search__back-arrow" (click)="returnBack()">
-        keyboard_backspace</i> -->
-      <!-- <div class="search__input">
+      <div class="search__input">
         <input #input type="text" [(ngModel)]="searchQuery" (keyup)="handleTyping()">
         <i class="material-icons">
           search
         </i>
-      </div> -->
-    <!-- </div> -->
-    <!-- <div 
+      </div>
+    </div> -->
+    <div 
       #result
       class="search__result"
       [ngClass]="{'show-details': selected_id }" >
@@ -29,25 +27,9 @@
           <router-outlet 
             *ngIf="movie.id == selected_id"
             ></router-outlet>
-      </div>
-    </div> -->
-    
-<div class="movies-list">
-  <div class="movies-list__genre" *ngFor="let genre of filteredSearchGenres"
-    [ngClass]="{'movies-list__genre--selected': genre.id === selectedGenreId }">
-    <router-outlet *ngIf="genre.id === selectedGenreId" #details></router-outlet>
-    <div>
-      <h5 [routerLink]="['/search']" [queryParams]="{genre_id: genre.id}" class="movies-list__genre-name">
-        {{genre.name}}</h5>
-    </div>
-    <div [id]="'genre-id-' + genre.id" class="movies-list__row">
-      <div *ngFor="let movie of genre.movies" class="movies-list__item">
-        <img [routerLink]="[movie.id]" (click)="handleImgClick(movie.id, genre.id)" [src]="getImgUrl(movie.poster_path)"
-          [alt]="movie.original_title" class="movies-list__poster">
+            <!-- <app-movie-details *ngIf="movie.id === selected_id" [movie]="movie"></app-movie-details> -->
       </div>
     </div>
-  </div>
-</div>
 
 </div>
 <!-- 

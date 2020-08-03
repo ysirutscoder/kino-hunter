@@ -287,11 +287,6 @@ export class MoviesService {
       );
       if (movie.poster_path) {
         this.searchResultMovies.push(filmToPush);
-        this.searchGenres[
-          this.searchGenres.findIndex(
-            (element) => element.id == movie.genre_ids[0]
-          )
-        ].movies.push(filmToPush);
         }
     });
   }

@@ -45,13 +45,12 @@ export class HeaderComponent implements OnInit {
     } else {
       setTimeout(() => {
         if(this.searchInputValue.length === 0)
-        this.router.navigate(["/list"], { relativeTo: this.route });
-      }, 1000);
+        this.router.navigate(["/list/28"], { relativeTo: this.route });
+      }, 1500);
     }
   }
 
   handleTyping() {
-    console.log('here')
     this.router.navigate([], {
       queryParams: { q: this.searchInputValue },
       relativeTo: this.route,
